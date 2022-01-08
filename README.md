@@ -2,7 +2,7 @@
 
 # User Stories
 1. As a user I want to register/login and be assigned to an organization because I want to quickly select which passwords for which organizations I want to store safely.
-2. An organization has many users
+2. An organization should be able to host many users.
 3. As a user I should be able to add a new username and password for a specific website of any of the 3 following types: Banking/Financial (CIBC, RBC, WealthSimple, etc.) , Email/WorkEmail (gmail,outlook,etc) , Social Media (Facebook,Instagram, Twitter,etc.)
 4. As a user I should also be able to generate passwords based on criteria that I can specify to match security password policy, including: 
 - password length
