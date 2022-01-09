@@ -65,5 +65,11 @@ module.exports = (db) => {
       .catch(e => res.send(e));
   });
 
+  //Logout
+  router.post('/logout', (req, res) => {
+    req.session.userId = null;
+    res.send({});
+  });
+
   return router;
 };
