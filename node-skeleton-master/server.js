@@ -61,3 +61,30 @@ app.get("/", (req, res) => {
 app.listen(PORT, () => {
   console.log(`Example app listening on port ${PORT}`);
 });
+
+const addUser =  function(user) {
+  return pool
+    .query(`
+    INSERT INTO users (name, email, password)
+    VALUES ($1, $2, $3)
+    RETURNING *;`, [user.name, user.email, user.password])
+    .then((result) => result.rows[0])
+    .catch((err) => {
+      console.log(err.message);
+    });
+}
+
+const getUserWithEmail = function(email) {
+  return pool
+    .query(`SELECT * FROM users WHERE email = $1;`, [email])
+    .then((result) => {
+      if (result.rows) {
+        return result.rows[0]
+      } else {
+        return null;
+      }
+    })
+    .catch((err) => {
+      console.log(err.message);
+    });
+}
