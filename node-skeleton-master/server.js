@@ -71,7 +71,7 @@ app.post("/passwords", (req,res) =>{
   db.query(`INSERT INTO users (name, username, email, login_password, organization_id)
   VALUES ($1,$2,$3,$4, $5)`,[req.body.name, req.body.username,req.body.email, req.body.password, req.body.organization_id])
   .then((result)=>{
-    console.log(result);
+    console.log(`result rows [0] is:`, result.rows[0]);
   })
   .catch((err)=>{
     console.log(err);
