@@ -55,3 +55,22 @@ app.get("/", (req, res) => {
 app.listen(PORT, () => {
   console.log(`Example app listening on port ${PORT}`);
 });
+
+//QUERY to send data to database --> INSERT INTO
+app.post("/passwords", (req,res) =>{
+  db.query(`INSERT INTO users (name, username, email, login_password, organization_id)
+  VALUES ($1,$2,$3,$4, $5)`,[req.body.name, req.body.username,req.body.email, req.body.password, req.body.organization_id])
+  .then((result)=>{
+    console.log(result);
+  })
+  .catch((err)=>{
+    console.log(err);
+  })
+  console.log(req.body.name);
+  console.log(req.body.username);
+  console.log(req.body.email);
+  console.log(req.body.password);
+  console.log(req.body.organization_id);
+  res.send("Hello Passwords Page");
+});
+
