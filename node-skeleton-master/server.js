@@ -55,36 +55,32 @@ app.use("/api/widgets", widgetsRoutes(db));
 // Separate them into separate routes files (see above).
 
 app.get("/", (req, res) => {
-  res.render("index");
+  res.render("homepage");
+});
+
+app.post("/login", (req, res) => {
+  res.send("hello");
 });
 
 app.listen(PORT, () => {
   console.log(`Example app listening on port ${PORT}`);
 });
 
-const addUser =  function(user) {
-  return pool
-    .query(`
-    INSERT INTO users (name, email, password)
-    VALUES ($1, $2, $3)
-    RETURNING *;`, [user.name, user.email, user.password])
-    .then((result) => result.rows[0])
-    .catch((err) => {
-      console.log(err.message);
-    });
-}
+//QUERY to send data to database --> INSERT INTO
+app.post("/passwords", (req,res) =>{
+  db.query(`INSERT INTO users (name, username, email, login_password, organization_id)
+  VALUES ($1,$2,$3,$4, $5)`,[req.body.name, req.body.username,req.body.email, req.body.password, req.body.organization_id])
+  .then((result)=>{
+    console.log(result);
+  })
+  .catch((err)=>{
+    console.log(err);
+  })
+  console.log(req.body.name);
+  console.log(req.body.username);
+  console.log(req.body.email);
+  console.log(req.body.password);
+  console.log(req.body.organization_id);
+  res.send("Hello Passwords Page");
+});
 
-const getUserWithEmail = function(email) {
-  return pool
-    .query(`SELECT * FROM users WHERE email = $1;`, [email])
-    .then((result) => {
-      if (result.rows) {
-        return result.rows[0]
-      } else {
-        return null;
-      }
-    })
-    .catch((err) => {
-      console.log(err.message);
-    });
-}
