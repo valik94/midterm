@@ -1,13 +1,18 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <title>Home Page</title>
+    <title>PasswordKeepr</title>
 
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Raleway&family=Spectral+SC:wght@500&family=Syncopate:wght@700&display=swap"
+      rel="stylesheet"
+    />
     <link rel="stylesheet" href="/vendor/normalize-4.1.1.css" type="text/css" />
     <link rel="stylesheet" href="/vendor/border-box.css" type="text/css" />
-    <link rel="stylesheet" href="/styles/main.css" type="text/css" />
-    <link rel="stylesheet" href="/styles/layout.css" type="text/css" />
-
+    <link rel="stylesheet" href="../styles/main.css" type="text/css" />
+    <link rel="stylesheet" href="../styles/header.css" type="text/css" />
     <script type="text/javascript" src="/vendor/jquery-3.0.0.js"></script>
     <script type="text/javascript" src="/scripts/app.js"></script>
   </head>
@@ -18,54 +23,69 @@
       <form action="" method="POST">
         <input
           type="text"
-          placeholder="username"
+          placeholder="USERNAME"
           name="username"
           id="username"
         />
         <input
           type="password"
-          placeholder="password"
+          placeholder="PASSWORD"
           name="password"
           id="password"
         />
-        <button>LOGIN</button>
+        <button class="lgn-btn">LOGIN</button>
       </form>
     </section>
     <section class="body">
       <div class="left-body-typo">
-        <h1>Don’t be the next victim of a ransomware attack.</h1>
-        <h3>
-          Keeper protects you, your family and business from password-related
-          data breaches and cyberthreats.
+        <h1>
+          Don't be the <br />next victim <br />
+          of a<br />
+          ransomeware<br />
+          attack.
+        </h1>
+        <h3 class="h2-main">
+          Keeper protects you, your<br />
+          family and business from<br />
+          password-related data breaches <br />
+          and cyberthreats.
         </h3>
       </div>
       <div class="right-body-registration">
-        <p>REGISTRATION</p>
-        <p>Its quick and easy</p>
-        <form action="" method="POST">
-          <input type="text" placeholder="name" name="" id="name" /> <br />
-          <input
-            type="text"
-            placeholder="username"
-            name=""
-            id="usr-rgstn"
-          /><br />
-          <input type="email" placeholder="email" name="" id="email" /><br />
-          <input
-            type="password"
-            placeholder="password"
-            name=""
-            id="new-password"
-          />
-          <br />
-          <input
-            type="text"
-            placeholder="organization_id"
-            name=""
-            id="organization-id"
-          />
-          <br />
-          <button>SIGN UP</button>
+        <p class="r">REGISTRATION</p>
+        <p class="iqande">Its quick and easy</p>
+        <form action="/password" method="POST">
+          <div class="reg-form">
+            <label for="name">Enter Your Name: </label>
+            <input type="text" placeholder="name" name="name" id="name" />
+            <br />
+            <label for="usr-rgstn">Enter Your Username: </label>
+            <input
+              type="text"
+              placeholder="username"
+              name="username"
+              id="usr-rgstn"
+            /><br />
+            <label for="email">Enter Your Email: </label>
+            <input type="email" placeholder="email" name="" id="email" /><br />
+            <label for="new-password">Enter Your Password: </label>
+            <input
+              type="password"
+              placeholder="password"
+              name="password"
+              id="new-password"
+            />
+            <br />
+            <label for="organization-id">Enter Organization_id</label>
+            <input
+              type="text"
+              placeholder="organization_id"
+              name="organization_id"
+              id="organization-id"
+            />
+            <br />
+          </div>
+          <button id="Signup">SIGN UP!</button>
         </form>
       </div>
     </section>

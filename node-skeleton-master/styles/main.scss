@@ -1,17 +1,58 @@
-body {
+.body {
   display: flex;
-  justify-content: center;
-  align-items: center;
-  min-height: 100vh;
+}
 
-  background: rgb(163, 208, 219);
-  background: linear-gradient(
-    227deg,
-    rgba(163, 208, 219, 1) 0%,
-    rgba(163, 176, 219, 1) 20%,
-    rgba(163, 173, 219, 1) 34%,
-    rgba(163, 219, 208, 1) 59%,
-    rgba(163, 208, 219, 1) 74%,
-    rgba(163, 208, 219, 1) 100%
-  );
+h1 {
+  margin-left: 40px;
+  margin-bottom: 0px;
+  font-family: "Syncopate", sans-serif;
+  font-size: 100px;
+  color: #4a6fa5;
+}
+
+.h2-main {
+  margin-left: 40px;
+  margin-top: 0px;
+  font-family: "Spectral SC", serif;
+  font-size: 42px;
+  color: #4a6fa5;
+}
+.right-body-registration {
+  display: flex;
+  flex-direction: column;
+  background-color: #4f6d7a;
+  width: 35%;
+  margin-top: 80px;
+  margin-left: 40px;
+  padding: 2px 2px 2px 2px;
+}
+.r {
+  margin-top: 0px;
+  margin-bottom: 0px;
+}
+.iqande {
+  margin-top: 0px;
+}
+p {
+  display: flex;
+  justify-content: flex-start;
+  font-family: "Raleway", sans-serif;
+  color: #c0d6df;
+  font-size: xx-large;
+}
+label {
+  color: #c0d6df;
+  font-family: "Raleway", sans-serif;
+}
+.reg-form {
+  display: flex;
+  flex-direction: column;
+  font-size: 30px;
+}
+
+#Signup {
+  font-size: xx-large;
+  margin-left: 36%;
+  margin-top: 20px;
+  font-family: "Raleway", sans-serif;
 }
