@@ -13,7 +13,7 @@
 6. As a user I have a button to copy the selected passwords for convenience and to avoid mistyping purposes.
 7. As a user I can categorize my passwords as aforementioned into 1 of 3 categories social media, email/work and banking/financial to be able to organize my password storage needs.
 
-**#Git Workflow**
+# Git Workflow
 NEVER code on Master or Main!
 
 #Create Feature Branches
