@@ -35,9 +35,9 @@ Workflow
 7. git pull
 8. git checkout -b feature/my-feature (Back to your feature)
 9. git merge master / git merge main
-10. Fix conflicts if any
-11. git commit (commit the merge)
-12. git push (So it's not only local)
+10. 10. Fix conflicts if any
+11. 11. git commit (commit the merge)
+12. 12. git push (So it's not only local)
 
 **Merging the branch back in master / main**
 13. git checkout master / git checkout main (To merge your branch)
