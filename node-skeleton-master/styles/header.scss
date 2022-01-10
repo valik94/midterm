@@ -3,14 +3,27 @@
   flex-direction: row;
   align-items: center;
   justify-content: space-between;
-  background-color: #4f6d7a;
+  background: #0f2027; /* fallback for old browsers */
+  background: -webkit-linear-gradient(
+    to left,
+    #2c5364,
+    #203a43,
+    #0f2027
+  ); /* Chrome 10-25, Safari 5.1-6 */
+  background: linear-gradient(
+    to left,
+    #2c5364,
+    #203a43,
+    #0f2027
+  ); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
   color: #c0d6df;
+
   border-radius: 2px;
   font-family: "Raleway", sans-serif;
 }
 
 h2 {
-  margin-top: 2px;
+  margin-top: 10px;
   margin-left: 50px;
 }
 
