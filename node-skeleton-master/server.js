@@ -7,6 +7,12 @@ const sassMiddleware = require("./lib/sass-middleware");
 const express = require("express");
 const app = express();
 const morgan = require("morgan");
+const cookieSession = require('cookie-session');
+app.use(cookieSession({
+  name: 'session',
+  keys: ['B62261B5-44EA-4AFD-9B84-AC6E025FCCDA', 'B26C1923-F568-4F38-BC0B-39B469126487'],
+}));
+
 
 // PG database client/connection setup
 const { Pool } = require("pg");
@@ -69,7 +75,7 @@ app.post("/passwords", (req,res) =>{
   db.query(`INSERT INTO users (name, username, email, login_password, organization_id)
   VALUES ($1,$2,$3,$4, $5)`,[req.body.name, req.body.username,req.body.email, req.body.password, req.body.organization_id])
   .then((result)=>{
-    console.log(result);
+    console.log(`result rows [0] is:`, result.rows[0]);
   })
   .catch((err)=>{
     console.log(err);

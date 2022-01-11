@@ -1,11 +1,12 @@
 -- Drop and recreate Users table
 DROP TABLE IF EXISTS users CASCADE;
-
+--users databases the core of the users data storage, including organization_id to reference the organizations table and timestamp (created_at) to track user creation time
 CREATE TABLE users (
   id SERIAL PRIMARY KEY NOT NULL,
   name VARCHAR(255) NOT NULL,
   username VARCHAR(255) NOT NULL UNIQUE,
   email VARCHAR(255) NOT NULL UNIQUE,
   login_password  VARCHAR(255) NOT NULL,
-  organization_id INTEGER REFERENCES organizations(id) ON DELETE CASCADE
+  organization_id INTEGER REFERENCES organizations(id) ON DELETE CASCADE,
+  created_at TIMESTAMP
 );
