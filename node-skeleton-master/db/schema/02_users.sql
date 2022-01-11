@@ -7,5 +7,6 @@ CREATE TABLE users (
   username VARCHAR(255) NOT NULL UNIQUE,
   email VARCHAR(255) NOT NULL UNIQUE,
   login_password  VARCHAR(255) NOT NULL,
-  organization_id INTEGER REFERENCES organizations(id) ON DELETE CASCADE
+  organization_id INTEGER REFERENCES organizations(id) ON DELETE CASCADE,
+  created_at TIMESTAMP
 );
