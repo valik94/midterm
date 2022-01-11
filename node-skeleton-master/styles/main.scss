@@ -15,15 +15,18 @@ body {
 }
 .body {
   display: flex;
+  justify-content: space-evenly;
 }
-
-h1 {
-  margin-left: 40px;
-  margin-bottom: 0px;
+.dont {
+  font-size: 80px;
   font-family: "Syncopate", sans-serif;
-  font-size: 100px;
+  margin-left: 5%;
+  margin-bottom: 0px;
   color: #4a6fa5;
   animation: animate 1s linear infinite;
+}
+.left-body-typo {
+  padding: 2%;
 }
 @keyframes animate {
   0%,
@@ -38,15 +41,13 @@ h1 {
 }
 
 .h2-main {
-  margin-left: 40px;
+  margin-left: 5%;
   margin-top: 0px;
   font-family: "Spectral SC", serif;
   font-size: 42px;
   color: #4a6fa5;
 }
 .right-body-registration {
-  display: flex;
-  flex-direction: column;
   background: #0f2027; /* fallback for old browsers */
   background: -webkit-linear-gradient(
     to left,
@@ -60,10 +61,11 @@ h1 {
     #203a43,
     #0f2027
   ); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
-  width: 35%;
-  margin-top: 80px;
-  margin-left: 40px;
-  padding: 2px 2px 2px 2px;
+  width: 40%;
+  margin-top: 3%;
+  margin-left: 5%;
+  margin-bottom: 2%;
+  padding: 0% 2% 4% 0%;
 }
 .r {
   margin-top: 0px;
@@ -73,8 +75,6 @@ h1 {
   margin-top: 0px;
 }
 p {
-  display: flex;
-  justify-content: flex-start;
   font-family: "Raleway", sans-serif;
   color: #c0d6df;
   font-size: xx-large;
@@ -84,15 +84,32 @@ label {
   font-family: "Raleway", sans-serif;
 }
 .reg-form {
-  display: flex;
-  flex-direction: column;
   font-size: 25px;
 }
 
 #Signup {
   font-size: xx-large;
-  margin-left: 32%;
-  margin-top: 0px;
-  margin-bottom: 30px;
+  margin: 2% 0% 5% 34%;
   font-family: "Raleway", sans-serif;
+}
+.reg-form > input {
+  width: 100%;
+}
+@media (max-width: 1300px) {
+  .left-body-typo {
+    width: 50%;
+    margin-left: 0%;
+  }
+  .right-body-registration {
+    width: 50%;
+    margin-left: 0%;
+  }
+  .dont {
+    font-size: 40px;
+    margin-left: 0%;
+  }
+  .h2-main {
+    font-size: 35px;
+    margin-left: 0%;
+  }
 }

@@ -56,6 +56,10 @@ app.post("/login", (req, res) => {
   res.send("hello");
 });
 
+app.get("/generate-password", (req, res) => {
+  res.render("password-generator");
+});
+
 app.listen(PORT, () => {
   console.log(`Example app listening on port ${PORT}`);
 });

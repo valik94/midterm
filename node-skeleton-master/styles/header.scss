@@ -1,6 +1,5 @@
 .header {
   display: flex;
-  flex-direction: row;
   align-items: center;
   justify-content: space-between;
   background: #0f2027; /* fallback for old browsers */
@@ -17,32 +16,40 @@
     #0f2027
   ); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
   color: #c0d6df;
-
   border-radius: 2px;
   font-family: "Raleway", sans-serif;
 }
-
-h2 {
-  margin-top: 10px;
-  margin-left: 50px;
+.main-logo {
+  margin: 1% 0% 0% 6.5%;
 }
-
+.form-data {
+  margin-right: 2%;
+  width: 40%;
+}
+.form-data * {
+  margin-right: 1%;
+}
 #username {
-  margin-right: 40px;
-  height: 55px;
   border-radius: 5px;
+  padding: 1.5% 0%;
 }
 
 #password {
-  margin-right: 40px;
-  height: 55px;
+  padding: 1.5% 0%;
   border-radius: 5px;
 }
 
 #lgn-btn {
-  margin-right: 40px;
-  margin-bottom: 5px;
-  height: 55px;
+  padding: 1.5% 0%;
   border-radius: 5px;
+  width: 33%;
   font-family: "Raleway", sans-serif;
+}
+@media (max-width: 1300px) {
+  .form-data input {
+    width: 30%;
+  }
+  .main-logo {
+    margin-left: 1.7%;
+  }
 }
