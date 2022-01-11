@@ -1,6 +1,7 @@
 -- Drop and recreate passwords_storage table
 DROP TABLE IF EXISTS passwords_storage CASCADE;
 
+--passwords database to hold authenticated/logged in users passwords, when they were created/updated and which organization they belong to
 CREATE TABLE passwords_storage (
   id SERIAL PRIMARY KEY NOT NULL,
   creator_id VARCHAR(255) NOT NULL,
