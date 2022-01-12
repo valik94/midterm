@@ -24,6 +24,8 @@ module.exports = (db) => {
           .json({ error: err.message });
       });
   });
+  return router;
+};
 
   router.get("/:id", (req, res) => {
     const id = req.params.id;
@@ -51,12 +53,33 @@ module.exports = (db) => {
       }
       req.session.userId = user.id;
     })
-    .catch(e => res.send(e));
+    .catch(err => res.send(err));
   });
 
   //Login
-  router.post("/login", (req, res) => {
-    res.send("hello");
+  const login =  function(email, password) {
+    return db.getUserWithEmail(email)
+    .then(user => {
+      if (bcrypt.compareSync(password, user.password)) {
+        return user;
+      }
+      return null;
+    });
+  }
+  exports.login = login;
+
+  router.post('/login', (req, res) => {
+    const {email, password} = req.body;
+    login(email, password)
+      .then(user => {
+        if (!user) {
+          res.send({error: "error"});
+          return;
+        }
+        req.session.userId = user.id;
+        res.send({user: {name: user.name, email: user.email, id: user.id}});
+      })
+      .catch(err => res.send(err));
   });
 
   //Logout
@@ -66,4 +89,4 @@ module.exports = (db) => {
   });
 
   return router;
-};
+
