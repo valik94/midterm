@@ -10,7 +10,7 @@ const router  = express.Router();
 const bcrypt = require('bcrypt');
 
 
-const userRoutes = function (db) {
+module.exports = (db) => {
   router.get("/", (req, res) => {
     db.query(`SELECT * FROM users;`)
       .then(data => {
