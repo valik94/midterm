@@ -11,6 +11,7 @@ const bcrypt = require('bcrypt');
 
 
 module.exports = (db) => {
+
   router.get("/", (req, res) => {
     db.query(`SELECT * FROM users;`)
       .then(data => {
@@ -25,6 +26,20 @@ module.exports = (db) => {
   });
   return router;
 };
+
+  router.get("/:id", (req, res) => {
+    const id = req.params.id;
+    db.query(`SELECT * FROM users WHERE id = $1`, [id])
+      .then(data => {
+        const user = data.rows;
+        res.json({ users });
+      })
+      .catch(err => {
+        res
+          .status(500)
+          .json({ error: err.message });
+      });
+  });
 
   // Register new user
   router.post('/', (req, res) => {
