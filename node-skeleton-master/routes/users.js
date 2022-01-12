@@ -10,7 +10,7 @@ const router  = express.Router();
 const bcrypt = require('bcrypt');
 
 
-module.exports = (db) => {
+const userRoutes = function (db) {
   router.get("/", (req, res) => {
     db.query(`SELECT * FROM users;`)
       .then(data => {
@@ -24,6 +24,8 @@ module.exports = (db) => {
       });
   });
 
+  module.exports = userRoutes;
+
   // Register new user
   router.post('/', (req, res) => {
     const user = req.body;
@@ -36,7 +38,7 @@ module.exports = (db) => {
       }
       req.session.userId = user.id;
     })
-    .catch(e => res.send(e));
+    .catch(err => res.send(err));
   });
 
   //Login
@@ -62,7 +64,7 @@ module.exports = (db) => {
         req.session.userId = user.id;
         res.send({user: {name: user.name, email: user.email, id: user.id}});
       })
-      .catch(e => res.send(e));
+      .catch(err => res.send(err));
   });
 
   //Logout
