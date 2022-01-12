@@ -23,8 +23,8 @@ module.exports = (db) => {
           .json({ error: err.message });
       });
   });
-
-  module.exports = userRoutes;
+  return router;
+};
 
   // Register new user
   router.post('/', (req, res) => {
@@ -74,4 +74,4 @@ module.exports = (db) => {
   });
 
   return router;
-};
+
