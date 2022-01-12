@@ -77,7 +77,7 @@ app.get("/dashboard", (req, res) => {
 
 app.get("/generate-password", (req, res) => {
   //connect to db and show the details in table
-  res.render("password-generator");
+  res.render("password_gen");
 });
 
 app.post("/generate-password", (req, res) => {
