@@ -6,6 +6,6 @@ CREATE TABLE users (
   id SERIAL PRIMARY KEY NOT NULL,
   email VARCHAR(255) NOT NULL UNIQUE,
   master_password  VARCHAR(255) NOT NULL,
-  organization_id INTEGER REFERENCES organizations(id) ON DELETE CASCADE,
+  organisation_id INTEGER REFERENCES organisations(id) ON DELETE CASCADE,
   created_at TIMESTAMP
 );

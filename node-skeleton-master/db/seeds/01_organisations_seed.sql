@@ -1,5 +1,5 @@
 -- Organizations table seeds here (Example)
-INSERT INTO organizations (id, name)
+INSERT INTO organisations (id, name)
 VALUES
 -- Social, TYPE=1
 (1, 'Lighthouse Labs'),
