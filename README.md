@@ -32,7 +32,7 @@ Workflow
 5. git push (So it's not only local)
 
 **Merging main in the branch**
-6. git checkout git checkout main (To update it)
+6. git checkout main (To update it)
 7. git pull
 8. git checkout feature/my-feature (Back to your feature)
 9. git merge main
