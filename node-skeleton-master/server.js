@@ -58,9 +58,6 @@ app.get("/", (req, res) => {
   res.render("homepage");
 });
 
-app.post("/login", (req, res) => {
-  res.send("hello");
-});
 
 app.get("/generate-password", (req, res) => {
   res.render("password-generator");
