@@ -68,7 +68,7 @@ module.exports = (db) => {
           return;
         }
         req.session.userId = user.id;
-        res.send({ user: { name: user.name, email: user.email, id: user.id } });
+        res.send({ user: { email: user.email, id: user.id } });
       })
       .catch((err) => res.send(err));
   });
@@ -81,7 +81,7 @@ module.exports = (db) => {
     res.redirect('/');
   });
 
-  //registration post query to write registration DB and then to post to passwords
+  //REGISTRATION POST query to write registration DB and then to post to passwords
   router.post("/passwords", (req, res) => {
     db.query(
       `INSERT INTO users (email, master_password, organisation_id, created_at)
