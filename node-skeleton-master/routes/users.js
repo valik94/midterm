@@ -4,8 +4,6 @@
  * See: https://expressjs.com/en/guide/using-middleware.html#middleware.router
  */
 
-const express = require('express');
-const router  = express.Router();
 
 const express = require("express");
 const router = express.Router();
@@ -37,53 +35,53 @@ module.exports = (db) => {
       });
   });
 
-  // Register new user POST route
-  router.post("/", (req, res) => {
-    const user = req.body;
-    user.password = bcrypt.hashSync(user.password, 12);
-    db.addUser(user)
-      .then((user) => {
-        if (!user) {
-          res.send({ error: "error" });
-          return;
-        }
-        req.session.userId = user.id;
-      })
-      .catch((err) => res.send(err));
-  });
+  // // Register new user POST route
+  // router.post("/", (req, res) => {
+  //   const user = req.body;
+  //   user.password = bcrypt.hashSync(user.password, 12);
+  //   db.addUser(user)
+  //     .then((user) => {
+  //       if (!user) {
+  //         res.send({ error: "error" });
+  //         return;
+  //       }
+  //       req.session.userId = user.id;
+  //     })
+  //     .catch((err) => res.send(err));
+  // });
 
-  //Login
-  const login = function (email, password) {
-    return db.getUserWithEmail(email).then((user) => {
-      if (bcrypt.compareSync(password, user.password)) {
-        return user;
-      }
-      return null;
-    });
-  };
-  exports.login = login;
-  //LOGIN post route
-  router.post("/login", (req, res) => {
-    const { email, password } = req.body;
-    login(email, password)
-      .then((user) => {
-        if (!user) {
-          res.send({ error: "error" });
-          return;
-        }
-        req.session.userId = user.id;
-        res.send({ user: { name: user.name, email: user.email, id: user.id } });
-      })
-      .catch((err) => res.send(err));
-  });
+  // //Login
+  // const login = function (email, password) {
+  //   return db.getUserWithEmail(email).then((user) => {
+  //     if (bcrypt.compareSync(password, user.password)) {
+  //       return user;
+  //     }
+  //     return null;
+  //   });
+  // };
+  // exports.login = login;
+  // //LOGIN post route
+  // router.post("/login", (req, res) => {
+  //   const { email, password } = req.body;
+  //   login(email, password)
+  //     .then((user) => {
+  //       if (!user) {
+  //         res.send({ error: "error" });
+  //         return;
+  //       }
+  //       req.session.userId = user.id;
+  //       res.send({ user: { name: user.name, email: user.email, id: user.id } });
+  //     })
+  //     .catch((err) => res.send(err));
+  // });
 
-  //Logout POST route
-  router.post("/logout", (req, res) => {
-    //req.session.userId = null;
-    req.session=null;
-    //res.send({req});
-    res.redirect('/');
-  });
+  // //Logout POST route
+  // router.post("/logout", (req, res) => {
+  //   //req.session.userId = null;
+  //   req.session=null;
+  //   //res.send({req});
+  //   res.redirect('/');
+  // });
 
   //registration post query to write registration DB and then to post to passwords
   router.post("/passwords", (req, res) => {

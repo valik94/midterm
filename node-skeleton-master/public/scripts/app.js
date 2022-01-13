@@ -1,10 +1,10 @@
 // Client facing scripts here
-let userId;
+// let userId;
 $(() => {
   const $login = $('#login-form');
   $login.on('submit', function(event) {
     event.preventDefault();
-    console.log('Hello');
+    console.log('AAAAAAAAAAAAAAA');
 
     const email = $('#username').val();
     const password = $('#password').val();
@@ -15,9 +15,13 @@ $(() => {
     .then(function(response) {
 
       if (response.status === "Success") {
-        res.render('dashboard')
+        // res.render('dashboard')
+        console.log(response);
+        window.location.replace("/dashboard")
       } else {
-        res.redirect('/')
+        // res.redirect('/')
+        console.log(response);
+
       }
     });
 
@@ -26,6 +30,7 @@ $(() => {
   const $signUp = $('#signup')
   $signUp.on('submit', function(event) {
     event.preventDefault();
+    console.log("Hello");
 
     const data = $(this).serialize();
     signUp(data)

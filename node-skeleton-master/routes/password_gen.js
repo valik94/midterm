@@ -21,18 +21,19 @@ app.use(cookieSession({
   maxAge: 24 * 60 * 60 * 1000
 }));
 
+module.exports = (db) => {
 /* get routes for password generator page
  * query to db for the current logged in user, and check what orginizations they are part of
  * send that information back to the client for the orginzation drop down menu to pick from */
 passwordRouter.get("/", (req, res) => {
   const id = req.session.user_id;
 
-  isAuthenticated(id)
+  isAuthenticated(id, db)
   .then((userId) => {
     if (!userId) {
       res.redirect('/login');
     }
-    return getUserOrganizations(userId);
+    return getUserOrganizations(userId, db);
   })
   .then((usersOrgs) => {
     const organisations = [...usersOrgs];
@@ -48,7 +49,7 @@ passwordRouter.post("/", (req, res) => {
   const id = req.session.user_id;
 
   if (req.body.length) {
-  const passwordGenerator = function () {
+  const passwordGenerator = function (db) {
 
     if (req.body.uppercase === 'true') {
       uppercaseBoolean = true;
@@ -83,23 +84,24 @@ passwordRouter.post("/", (req, res) => {
     });
   };
 
-  const thePassword = passwordGenerator();
+  const thePassword = passwordGenerator(db);
   console.log("thepassword? ", thePassword);
-  getOrgIdFromName(req.body.organisationName)
+  getOrgIdFromName(req.body.organisationName, db)
     .then((val) => {
       const orgId = val;
-      newPasswordToDatabase(id, orgId, req.body.category, req.body.url, thePassword);
+      newPasswordToDatabase(id, orgId, req.body.category, req.body.url, thePassword, db);
       res.send('This worked!');
     });
   } else {
-    getOrgIdFromName(req.body.organisationName)
+    getOrgIdFromName(req.body.organisationName, db)
     .then((val) => {
       const orgId = val;
-      newPasswordToDatabase(id, orgId, req.body.category, req.body.url, req.body.password);
+      newPasswordToDatabase(id, orgId, req.body.category, req.body.url, req.body.password, db);
       res.send('This also worked! You can submit your own password');
     });
   }
 });
-
+return router;
+}
 // export whole router
-module.exports = passwordRouter;
+//module.exports = passwordRouter;

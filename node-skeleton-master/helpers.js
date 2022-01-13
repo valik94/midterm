@@ -1,6 +1,6 @@
 // These are helper functions file
 
-// Generates a random password based on length inputted by the user
+// Generates a random password based on length inputed by the user
 const generatePassword = function() {
   const userInput = process.argv[2]
   let length = 8,
@@ -14,7 +14,7 @@ const generatePassword = function() {
 
 /* helper function to check if a users email address already exists in our database - FIXED!
  * return a promise with false inside it if no userId exists */
-const emailExists = function (userEmail) {
+const emailExists = function (userEmail, db) {
   const query = `
       SELECT email
       FROM users
@@ -33,7 +33,7 @@ const emailExists = function (userEmail) {
 };
 
 // helper function that takes in req.body.email as "userEmail" and the users object, added hashing! much security! - WORKS!
-const passwordValidator = function (userPassword, userEmail) {
+const passwordValidator = function (userPassword, userEmail, db) {
 
   const query = `
      SELECT id, master_password
@@ -54,7 +54,7 @@ const passwordValidator = function (userPassword, userEmail) {
 
 /* helper function that will determine if a user is authorized to be logged in or not
  * queries our db with the, return a promise with a false value if no userId exists */
-const isAuthenticated = function (userId) {
+const isAuthenticated = function (userId, db) {
 
   if (userId) {
     const query = `
@@ -78,7 +78,7 @@ const isAuthenticated = function (userId) {
 };
 
 // helper function to get all passwords by a userID and render it to the index page client side eventually
-const getPasswordsbyUsers = function (userId) {
+const getPasswordsbyUsers = function (userId, db) {
 
   if (userId) {
     const query = `
@@ -97,7 +97,7 @@ const getPasswordsbyUsers = function (userId) {
 };
 
 // helper function to delete password from the database when passed the button id. The button id should match the password primary key.
-const deletePasswordFromDb = function (buttonId) {
+const deletePasswordFromDb = function (buttonId, db) {
   const query = `
     DELETE FROM passwords
     WHERE passwords.id = ${buttonId}
@@ -108,7 +108,7 @@ const deletePasswordFromDb = function (buttonId) {
 }
 
 // helper function to edit password from the database when passed the button id. The button id should match the password primary key.
-const editPasswordFromDb = function (buttonId, newPassword) {
+const editPasswordFromDb = function (buttonId, newPassword, db) {
   const query = `
     UPDATE passwords
     SET password_text = '${newPassword}'
@@ -119,7 +119,7 @@ const editPasswordFromDb = function (buttonId, newPassword) {
 }
 
 // helper function to retrieve new password
-const getEditedPassword = function (buttonId) {
+const getEditedPassword = function (buttonId, db) {
   const query =  `
     SELECT password_text
     FROM passwords
@@ -130,7 +130,7 @@ const getEditedPassword = function (buttonId) {
 }
 
 // helper function to get organizations for a user to populate the org dropdown box when they make a password
-const getUserOrganizations = function (userId) {
+const getUserOrganizations = function (userId, db) {
   const query = `
   SELECT DISTINCT organisations.name AS name
   FROM organisations
@@ -144,7 +144,7 @@ const getUserOrganizations = function (userId) {
 };
 
 //will be used to enter a new login/password to the database
-const newPasswordToDatabase = function (userId, orgId, category, url, password_text) {
+const newPasswordToDatabase = function (userId, orgId, category, url, password_text, db) {
   db.query(`SELECT id FROM organisations WHERE organisations.name = '${orgName}';`)
   const query =`
   INSERT INTO passwords (user_id, organisations_id, category, url, password_text)
@@ -153,7 +153,7 @@ const newPasswordToDatabase = function (userId, orgId, category, url, password_t
   return db.query(query);
 };
 
-const getOrgIdFromName = function (name) {
+const getOrgIdFromName = function (name, db) {
   const query = `
   SELECT id
   FROM organisations
@@ -167,7 +167,7 @@ const getOrgIdFromName = function (name) {
 }
 
  /* sorts the array that later renders the dom elements by the url alpabetically */
-const sortUserPasswords = function (userPasswordArr) {
+const sortUserPasswords = function (userPasswordArr, db) {
   return userPasswordArr.sort((a, b) => {
     if (a.url < b.url){
       return -1;

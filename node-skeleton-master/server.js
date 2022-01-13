@@ -54,16 +54,27 @@ const loginRoutes = require("./routes/login");
 const logoutRoutes = require("./routes/logout");
 const indexRoutes = require("./routes/index");
 
+const passwordsStorageRoutes = require("./routes/passwords_storage")
+const passwordGeneratorRoutes = require("./routes/password_gen")
+const editPasswordRoutes = require("./routes/editPassword")
+
+const res = require("express/lib/response");
+
 
 // Mount all resource routes
 // Note: Feel free to replace the example routes below with your own
 // app.use("/api/users", usersRoutes(db));
 app.use("/api/widgets", widgetsRoutes(db));
 
-app.use("/users", usersRoutes);
-app.use("/login", loginRoutes);
-app.use("/logout", logoutRoutes);
-app.use("/dashboard", indexRoutes);
+app.use("/users", usersRoutes(db));
+app.use("/login", loginRoutes(db));
+app.use("/logout", logoutRoutes(db));
+
+app.use("/logout", passwordsStorageRoutes(db));
+app.use("/logout", passwordGeneratorRoutes(db));
+app.use("/logout", editPasswordRoutes(db));
+
+// app.use("/dashboard", indexRoutes(db));
 
 
 /*
@@ -71,8 +82,8 @@ app.use convention ("route", function )
 */
 
 app.use("/test", testRoutes(db)); //usersRoutes is a function and when it runs it returns a function(db) --> usersRoutes returns a router.
-app.use("/api/users", usersRoutes(db));
-app.use("/api//widgets", widgetsRoutes(db));
+// app.use("/api/users", usersRoutes(db));
+// app.use("/api//widgets", widgetsRoutes(db));
 // Note: mount other resources here, using the same pattern above
 
 // Home page
@@ -83,30 +94,34 @@ app.get("/", (req, res) => {
   res.render("homepage");
 });
 
-
-app.post("/passwords", (req, res)=>{
-  db.query(
-    `INSERT INTO users (email, master_password, organisation_id, created_at)
-  VALUES ($1,$2,$3,$4)`,
-    [
-      req.body.email,
-      req.body.master_password,
-      req.body.organisation_id,
-      req.body.created_at,
-    ]
-  )
-  //res.render("password_gen")
-  res.redirect('/generate-password')
+app.get("/dashboard", (req, res) => {
+  res.render("dashboard", { users: [] })
 })
 
-app.get("/dashboard", (req, res) => {
-  res.send(status);
-});
 
-app.get("/generate-password", (req, res) => {
-  //connect to db and show the details in table
-  res.render("password_gen");
-});
+// app.post("/passwords", (req, res)=>{
+//   db.query(
+//     `INSERT INTO users (email, master_password, organisation_id, created_at)
+//   VALUES ($1,$2,$3,$4)`,
+//     [
+//       req.body.email,
+//       req.body.master_password,
+//       req.body.organisation_id,
+//       req.body.created_at,
+//     ]
+//   )
+//   //res.render("password_gen")
+//   res.redirect('/generate-password')
+// })
+
+// app.get("/dashboard", (req, res) => {
+//   res.send(status);
+// });
+
+// app.get("/generate-password", (req, res) => {
+//   //connect to db and show the details in table
+//   res.render("password_gen");
+// });
 
 // app.post("/generate-password", (req, res) => {
 //   //connect to db and add the details into the  table

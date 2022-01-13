@@ -15,6 +15,7 @@ module.exports = (db) => {
 
   router.post("/", (req, res) => {
     const { email, password } = req.body;
+    console.log('TEST: router.post', req.body);
 
     if (!email) {
       res.send("Must provide email!");
@@ -26,14 +27,14 @@ module.exports = (db) => {
 
     /* promise chain that will first check if the users email exists against our db and then validate their password
      * async error handling for when a username or password is invalid will happen in here - TODO */
-    let validUserEmail = emailExists(email);
+    let validUserEmail = emailExists(email, db);
     validUserEmail.then((value) => {
 
       if (!value) {
         res.send("Email or Password is invalid!");
         throw new Error('email does not exist');
       } else {
-        return passwordValidator(password, email);
+        return passwordValidator(password, email, db);
       }
     }).then((value) => {
 
@@ -50,4 +51,5 @@ module.exports = (db) => {
     });
   });
 
+  return router;
   };
