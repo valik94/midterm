@@ -41,21 +41,21 @@ app.use(
   })
 );
 
-app.use(express.static("public"));
+app.use(express.static("public")); //sets static directory if you want ot read images and JS. tells express that public folder is static (front-end browser programs). Don't treat as programs but use when needed
 
 // Separated Routes for each Resource
 // Note: Feel free to replace the example routes below with your own
-const usersRoutes = require("./routes/users");
-const widgetsRoutes = require("./routes/widgets");
+const usersRoutes = require("./routes/users"); //users routes from users.js --> userRoutes is a function that is exported
+const widgetsRoutes = require("./routes/widgets"); //widgets routes from widgets.js --> widgetsRoutes is a function that is exported
 
 // Mount all resource routes
 // Note: Feel free to replace the example routes below with your own
 
 /*
-app.use convention
+app.use convention ("route", function )
 */
 
-app.use("/api/users", usersRoutes(db));
+app.use("/api/users", usersRoutes(db)); //usersRoutes is a function and when it runs it returns a function(db) --> usersRoutes returns a router.
 app.use("/api/widgets", widgetsRoutes(db));
 // Note: mount other resources here, using the same pattern above
 
