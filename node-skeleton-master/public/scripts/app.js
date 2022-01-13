@@ -72,7 +72,18 @@ $(() => {
 
    //TEST CODE - VAL
   console.log("ready")
-  $("#lgn-btn").on("submit",submitForm)
+  $("#Signup").on("submit",submitForm) //Signup button
+  $("#lgn-btn").on("submit", login) //login button
+
+  const Login = function(){
+    console.log('Login clicked!');
+
+  $.get("/api/users/:id")
+  .then(data =>{
+    console.log('My data is:', data);
+    renderUsers(data.users)
+  });
+}
 
   const submitForm = function(){
     console.log('Sign up clicked!');
