@@ -32,7 +32,7 @@ Workflow
 5. git push (So it's not only local)
 
 **Merging main in the branch**
-6. git checkout git checkout main (To update it)
+6. git checkout main (To update it)
 7. git pull
 8. git checkout feature/my-feature (Back to your feature)
 9. git merge main
@@ -41,7 +41,7 @@ Workflow
 12. git push (So it's not only local)
 
 **Merging the branch back in main**
-13. git checkout git checkout main (To merge your branch)
+13. git checkout main (To merge your branch)
 14. git merge feature/my-feature
 15. Should not be any conflict since you cleaned them in the branch first
 16. git commit (commit the merge)

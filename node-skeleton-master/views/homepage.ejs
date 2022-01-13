@@ -24,7 +24,7 @@
   </head>
 
   <body>
-    <section class="header">
+    <header class="header">
       <h2 class="main-logo">PASSWORD KEEPER</h2>
       <form class="form-data" id="login-form">
         <input
@@ -41,7 +41,7 @@
         />
         <button id="lgn-btn" class="btn btn-outline-warning" type="submit">LOGIN</button>
       </form>
-    </section>
+    </header>
     <section class="body">
       <div class="left-body-typo">
         <p class="dont">
@@ -62,30 +62,37 @@
         <p class="iqande">Its quick and easy</p>
         <form action="/passwords" method="POST">
           <div class="reg-form">
-            <label for="name">Enter Your Name: </label><br />
-            <input type="text" placeholder="name" name="name" id="name" />
-            <label for="usr-rgstn">Enter Your Username: </label><br />
+            <!-- <label for="name">Enter Your Name: </label><br />
+            <input type="text" placeholder="name" name="name" id="name" /> -->
+            <!-- <label for="usr-rgstn">Enter Your Username: </label><br />
             <input
               type="text"
               placeholder="username"
               name="username"
               id="usr-rgstn"
-            />
+            /> -->
             <label for="email">Enter Your Email: </label><br />
             <input type="email" placeholder="email" name="email" id="email" />
             <label for="new-password">Enter Your Password: </label><br />
             <input
               type="password"
               placeholder="password"
-              name="password"
+              name="master_password"
               id="new-password"
             />
-            <label for="organization-id">Enter Organization_id: </label><br />
+            <label for="organisation-id">Enter Organization_id: </label><br />
             <input
               type="text"
-              placeholder="organization_id"
-              name="organization_id"
-              id="organization-id"
+              placeholder="organisation_id"
+              name="organisation_id"
+              id="organisation-id"
+            />
+            <label for="date">Enter today's date:</label><br />
+            <input
+              type="text"
+              placeholder="YYYY-MM-DD"
+              name="date"
+              id="date"
             />
             <br />
           </div>
