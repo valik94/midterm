@@ -25,7 +25,7 @@ module.exports = (db) => {
     const id = req.params.id;
     db.query(`SELECT * FROM users WHERE id = $1`, [id])
       .then((data) => {
-        const user = data.rows;
+        const user = data.rows[0];
         res.json({ users });
       })
       .catch((err) => {
@@ -75,8 +75,35 @@ module.exports = (db) => {
 
   //Logout POST route
   router.post("/logout", (req, res) => {
-    req.session.userId = null;
-    res.send({});
+    //req.session.userId = null;
+    req.session=null;
+    //res.send({req});
+    res.redirect('/');
+  });
+
+  //registration post query to write registration DB and then to post to passwords
+  router.post("/passwords", (req, res) => {
+    db.query(
+      `INSERT INTO users (email, master_password, organisation_id, created_at)
+    VALUES ($1,$2,$3,$4)`,
+      [
+        req.body.email,
+        req.body.master_password,
+        req.body.organisation_id,
+        req.body.created_at,
+      ]
+    )
+      .then((result) => {
+        console.log(`result is:`, result);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+    console.log(req.body.email);
+    console.log(req.body.master_password);
+    console.log(req.body.organisation_id);
+    console.log(req.body.created_at);
+    res.send("Hello Passwords Page");
   });
 
   return router;

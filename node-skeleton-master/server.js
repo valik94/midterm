@@ -45,6 +45,7 @@ app.use(express.static("public")); //sets static directory if you want ot read i
 
 // Separated Routes for each Resource
 // Note: Feel free to replace the example routes below with your own
+const testRoutes = require('./routes/test')
 const usersRoutes = require("./routes/users"); //users routes from users.js --> userRoutes is a function that is exported
 const widgetsRoutes = require("./routes/widgets"); //widgets routes from widgets.js --> widgetsRoutes is a function that is exported
 
@@ -55,8 +56,9 @@ const widgetsRoutes = require("./routes/widgets"); //widgets routes from widgets
 app.use convention ("route", function )
 */
 
-app.use("/api/users", usersRoutes(db)); //usersRoutes is a function and when it runs it returns a function(db) --> usersRoutes returns a router.
-app.use("/api/widgets", widgetsRoutes(db));
+app.use("/test", testRoutes(db)); //usersRoutes is a function and when it runs it returns a function(db) --> usersRoutes returns a router.
+app.use("/api/users", usersRoutes(db));
+app.use("/api//widgets", widgetsRoutes(db));
 // Note: mount other resources here, using the same pattern above
 
 // Home page
@@ -70,6 +72,21 @@ app.get("/", (req, res) => {
 app.post("/login", (req, res) => {
   res.render("dashboard");
 });
+
+app.post("/passwords", (req, res)=>{
+  db.query(
+    `INSERT INTO users (email, master_password, organisation_id, created_at)
+  VALUES ($1,$2,$3,$4)`,
+    [
+      req.body.email,
+      req.body.master_password,
+      req.body.organisation_id,
+      req.body.created_at,
+    ]
+  )
+  //res.render("password_gen")
+  res.redirect('/generate-password')
+})
 
 app.get("/dashboard", (req, res) => {
   res.send(status);
@@ -90,29 +107,30 @@ app.listen(PORT, () => {
   console.log(`Example app listening on port ${PORT}`);
 });
 
+
 //QUERY to send data to database --> INSERT INTO
-app.post("/passwords", (req, res) => {
-  db.query(
-    `INSERT INTO users (name, username, email, login_password, organization_id)
-  VALUES ($1,$2,$3,$4, $5)`,
-    [
-      req.body.name,
-      req.body.username,
-      req.body.email,
-      req.body.password,
-      req.body.organization_id,
-    ]
-  )
-    .then((result) => {
-      console.log(`result rows [0] is:`, result.rows[0]);
-    })
-    .catch((err) => {
-      console.log(err);
-    });
-  console.log(req.body.name);
-  console.log(req.body.username);
-  console.log(req.body.email);
-  console.log(req.body.password);
-  console.log(req.body.organization_id);
-  res.send("Hello Passwords Page");
-});
+// app.post("/passwords", (req, res) => {
+//   db.query(
+//     `INSERT INTO users (name, username, email, login_password, organization_id)
+//   VALUES ($1,$2,$3,$4, $5)`,
+//     [
+//       req.body.name,
+//       req.body.username,
+//       req.body.email,
+//       req.body.password,
+//       req.body.organization_id,
+//     ]
+//   )
+//     .then((result) => {
+//       console.log(`result rows [0] is:`, result.rows[0]);
+//     })
+//     .catch((err) => {
+//       console.log(err);
+//     });
+//   console.log(req.body.name);
+//   console.log(req.body.username);
+//   console.log(req.body.email);
+//   console.log(req.body.password);
+//   console.log(req.body.organization_id);
+//   res.send("Hello Passwords Page");
+// });

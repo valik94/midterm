@@ -1,4 +1,5 @@
 // Client facing scripts here
+let userId;
 $(() => {
   const $login = $('#lgn-btn')
   $login.on('submit', function(event) {
@@ -57,4 +58,25 @@ $(() => {
     });
   }
 
-})
+   //TEST CODE - VAL
+  console.log("ready")
+  $("#lgn-btn").on("submit",submitForm)
+
+  const submitForm = function(){
+    console.log('Sign up clicked!');
+
+  $.get("/api/users")
+  .then(data =>{
+    console.log('My data is:', data);
+    renderUsers(data.users)
+  });
+}
+
+const renderUsers = function(users){
+  const $container = $("#lgn-btn");
+  $container.empty();
+  for (const user of users){
+    $container.append(`<li>${user.email}</li>`);
+  }
+}
+});

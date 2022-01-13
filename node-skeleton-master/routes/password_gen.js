@@ -5,12 +5,11 @@
  * See: https://expressjs.com/en/guide/using-middleware.html#middleware.router
  */
 
-// include db module from dbConn.js
 const express = require('express');
+const router = express.Router();
 const passwordRouter = express.Router();
 const generator = require('generate-password');
 const app = express();
-const { db, Pool } = require('../db/dbConn');
 const { isAuthenticated, getUserOrganizations, newPasswordToDatabase, getOrgIdFromName } = require("../helpers.js");
 
 // require and use cookie session to store user ids for cookie sessions
