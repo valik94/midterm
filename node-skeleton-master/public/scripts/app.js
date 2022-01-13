@@ -1,21 +1,28 @@
 // Client facing scripts here
 $(() => {
-  const $login = $('#lgn-btn')
+  const $login = $('#login-form');
   $login.on('submit', function(event) {
     event.preventDefault();
+    console.log('Hello');
 
+    const email = $('#username').val();
+    const password = $('#password').val();
     // const data = $(this).serialize();
-    logIn()
+    $.ajax({ method: 'POST',
+    url: '/login',
+    data: { email: email, password: password }})
+    .then(function(response) {
 
-  })
-  function logIn() {
-    return $.ajax({
-      method: "POST",
-      url: "api/users/login",
+      if (response.status === "Success") {
+        res.render('dashboard')
+      } else {
+        res.redirect('/')
+      }
     });
-  }
 
-  const $signUp = $('#Signup')
+  });
+
+  const $signUp = $('#signup')
   $signUp.on('submit', function(event) {
     event.preventDefault();
 

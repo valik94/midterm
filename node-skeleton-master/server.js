@@ -7,6 +7,7 @@ const sassMiddleware = require("./lib/sass-middleware");
 const express = require("express");
 const app = express();
 const morgan = require("morgan");
+const bcrypt = require('bcrypt');
 const cookieSession = require("cookie-session");
 app.use(
   cookieSession({
@@ -48,10 +49,21 @@ app.use(express.static("public"));
 const usersRoutes = require("./routes/users");
 const widgetsRoutes = require("./routes/widgets");
 
+const loginRoutes = require("./routes/login");
+const logoutRoutes = require("./routes/logout");
+const indexRoutes = require("./routes/index");
+
+
 // Mount all resource routes
 // Note: Feel free to replace the example routes below with your own
-app.use("/api/users", usersRoutes(db));
+// app.use("/api/users", usersRoutes(db));
 app.use("/api/widgets", widgetsRoutes(db));
+
+app.use("/users", usersRoutes);
+app.use("/login", loginRoutes);
+app.use("/logout", logoutRoutes);
+app.use("/dashboard", indexRoutes);
+
 // Note: mount other resources here, using the same pattern above
 
 // Home page
@@ -62,52 +74,23 @@ app.get("/", (req, res) => {
   res.render("homepage");
 });
 
-app.post("/login", (req, res) => {
-  res.render("dashboard");
-});
 
-app.get("/dashboard", (req, res) => {
-  res.send(status);
-});
+// app.get("/dashboard", (req, res) => {
+//   res.send(status);
+// });
 
-app.get("/generate-password", (req, res) => {
-  //connect to db and show the details in table
-  res.render("password-generator");
-});
+// app.get("/generate-password", (req, res) => {
+//   //connect to db and show the details in table
+//   res.render("password-generator");
+// });
 
-app.post("/generate-password", (req, res) => {
-  //connect to db and add the details into the  table
-  // send data through temlatevars = { id: xxx}
-  // redirect or render to dashboard
-});
+// app.post("/generate-password", (req, res) => {
+//   //connect to db and add the details into the  table
+//   // send data through temlatevars = { id: xxx}
+//   // redirect or render to dashboard
+// });
 
 app.listen(PORT, () => {
   console.log(`Example app listening on port ${PORT}`);
 });
 
-//QUERY to send data to database --> INSERT INTO
-app.post("/passwords", (req, res) => {
-  db.query(
-    `INSERT INTO users (name, username, email, login_password, organization_id)
-  VALUES ($1,$2,$3,$4, $5)`,
-    [
-      req.body.name,
-      req.body.username,
-      req.body.email,
-      req.body.password,
-      req.body.organization_id,
-    ]
-  )
-    .then((result) => {
-      console.log(`result rows [0] is:`, result.rows[0]);
-    })
-    .catch((err) => {
-      console.log(err);
-    });
-  console.log(req.body.name);
-  console.log(req.body.username);
-  console.log(req.body.email);
-  console.log(req.body.password);
-  console.log(req.body.organization_id);
-  res.send("Hello Passwords Page");
-});

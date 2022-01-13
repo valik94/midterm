@@ -1,7 +1,7 @@
 // These are helper functions file
 
 // Generates a random password based on length inputted by the user
-const generatePassword = function {
+const generatePassword = function() {
   const userInput = process.argv[2]
   let length = 8,
       charset = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789",
