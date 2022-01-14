@@ -84,7 +84,11 @@ module.exports = (db) => {
   // });
 
   //REGISTRATION POST query to write registration DB and then to post to passwords
+<<<<<<< HEAD
   router.post("/", (req, res) => {
+=======
+  router.post("/passwords", (req, res) => {
+>>>>>>> main
     db.query(
       `INSERT INTO users (email, master_password, organisation_id, created_at)
     VALUES ($1,$2,$3,$4)`,

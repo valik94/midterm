@@ -3,8 +3,8 @@ INSERT INTO organisations (id, name)
 VALUES
 -- Social, TYPE=1
 (1, 'Lighthouse Labs'),
-(2, 'LastPass');
--- (3, 'Instagram');
+(2, 'LastPass'),
+(3, 'BMO Bank');
 -- --Banking, TYPE=2
 -- (4, 'TD Bank')
 -- (5, 'RBC Bank')
