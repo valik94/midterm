@@ -27,14 +27,15 @@
     <script type="text/javascript" src="/scripts/app.js"></script>
   </head>
   <body>
+    <%- include('partials/_header') %>
     <!-- Header -->
-    <header class="header">
+    <!-- <header class="header">
       <h2 class="main-logo">PASSWORD KEEPER</h2>
       <form class="form-data" action="/logout" method="POST">
         <a class="my-accnt" href="http://localhost:8080/dashboard">My Account</a>
         <button id="lgout-btn" class="btn btn-outline-warning">LOGOUT</button>
       </form>
-    </header>
+    </header> -->
 
     <!--Social-->
     <h3>Social</h3>
@@ -104,7 +105,7 @@
       <% } %> <% } %>
     </div>
     <div>
-      <button type="submit" id="generate">Create New Password</button>
+      <a href="/generate-password" class="nav-link"> Create New Password </a>
     </div>
   </body>
 </html>

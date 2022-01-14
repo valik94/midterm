@@ -29,13 +29,17 @@ router.get("/", (req, res) => {
   console.log("ID", id);
   isAuthenticated(id, db)
   .then((userId) => {
+    console.log("router.get password generator", userId);
     if (!userId) {
       res.redirect('/login');
     }
     return getUserOrganizations(userId, db);
   })
   .then((usersOrgs) => {
+    console.log("router.get password generator", usersOrgs);
+
     const organisations = [...usersOrgs];
+    console.log("organisations", organisations);
     const templateVars = { value: id, organisations };
     res.render("password_gen", templateVars);
   }).catch(error => {

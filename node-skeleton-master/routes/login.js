@@ -1,7 +1,7 @@
 const express = require('express');
 const res = require('express/lib/response');
 const router  = express.Router();
-const { emailExists, passwordValidator } = require("../helpers.js");
+const { isAuthenticated, emailExists, passwordValidator } = require("../helpers.js");
 
 
 module.exports = (db) => {
@@ -10,8 +10,18 @@ module.exports = (db) => {
   //   res.render("dashboard");
   // });
   router.get('/', (req, res) => {
-    res.render('homepage')
+    const id = req.session.user_id;
+    const idIsExisting = isAuthenticated(id, db);
+    idIsExisting.then((value) => {
+
+      if (value) {
+        res.redirect('/index');
+      }
+      const templateVars = {value: false};
+
+    res.render('homepage', templateVars)
   })
+})
 
   router.post("/", (req, res) => {
     const { email, password } = req.body;
