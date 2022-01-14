@@ -147,7 +147,7 @@ const getUserOrganizations = function (userId, db) {
 const newPasswordToDatabase = function (userId, orgId, category, url, password_text, db) {
   db.query(`SELECT id FROM organisations WHERE organisations.name = '${orgName}';`)
   const query =`
-  INSERT INTO passwords (user_id, organisations_id, category, url, password_text)
+  INSERT INTO passwords (user_id, organisation_id, category, url, password_text)
   VALUES (${userId}, ${orgId}, '${category}', '${url}', '${password_text}');
   `;
   return db.query(query);

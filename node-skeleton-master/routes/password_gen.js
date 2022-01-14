@@ -7,7 +7,6 @@
 
 const express = require('express');
 const router = express.Router();
-const passwordRouter = express.Router();
 const generator = require('generate-password');
 const app = express();
 const { isAuthenticated, getUserOrganizations, newPasswordToDatabase, getOrgIdFromName } = require("../helpers.js");
@@ -27,18 +26,22 @@ module.exports = (db) => {
 /* get routes for password generator page
  * query to db for the current logged in user, and check what orginizations they are part of
  * send that information back to the client for the orginzation drop down menu to pick from */
-passwordRouter.get("/", (req, res) => {
+router.get("/", (req, res) => {
   const id = req.session.user_id;
-
+  console.log("ID", id);
   isAuthenticated(id, db)
   .then((userId) => {
+    console.log("router.get password generator", userId);
     if (!userId) {
       res.redirect('/homepage');
     }
     return getUserOrganizations(userId, db);
   })
   .then((usersOrgs) => {
+    console.log("router.get password generator", usersOrgs);
+
     const organisations = [...usersOrgs];
+    console.log("organisations", organisations);
     const templateVars = { value: id, organisations };
     res.render("password_gen", templateVars);
   }).catch(error => {
@@ -47,7 +50,7 @@ passwordRouter.get("/", (req, res) => {
 });
 
 // POSTS routes - TODO - take in db here - TEST
-passwordRouter.post("/", (req, res) => {
+router.post("/", (req, res) => {
   const id = req.session.user_id;
 
   if (req.body.length) {

@@ -24,7 +24,8 @@
   </head>
 
   <body>
-    <header class="header">
+    <%- include('partials/_header') %>
+    <!-- <header class="header">
       <h2 class="main-logo">PASSWORD KEEPER</h2>
       <form class="form-data" id="login-form">
         <input
@@ -43,7 +44,7 @@
           LOGIN
         </button>
       </form>
-    </header>
+    </header> -->
     <section class="body">
       <div class="left-body-typo">
         <p class="dont">
@@ -74,7 +75,7 @@
               id="usr-rgstn"
             /> -->
             <label for="email">Enter Your Email: </label><br />
-            <input type="email" placeholder="email" name="email" id="email" />
+            <input type="email" placeholder="email" name="email" id="register-email" />
             <label for="new-password">Enter Your Password: </label><br />
             <input
               type="password"

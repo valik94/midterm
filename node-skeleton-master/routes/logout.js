@@ -15,7 +15,7 @@ module.exports = (db) => {
   //If anything is missing in this POST route its probably missing passing it db.
   router.post("/", (req, res) => {
     req.session = null;
-    res.redirect('/homepage');
+    res.redirect('/');
   });
   return router;
 };
