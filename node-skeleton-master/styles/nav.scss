@@ -1,0 +1,45 @@
+/* Mobile first! */
+nav {
+  display: flex;
+  position: fixed;
+  justify-content: space-between;
+  background: -webkit-linear-gradient(to left, #2c5364, #203a43, #0f2027);
+  /* Chrome 10-25, Safari 5.1-6 */
+  background: linear-gradient(to left, #2c5364, #203a43, #0f2027);
+  /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+  width: 100vw;
+  height: 120px;
+  padding: 1.7em;
+  transition: background-color 0.4s ease-out;
+}
+
+a:link,
+a:visited {
+  text-decoration: none;
+  color: white;
+}
+
+h5.navbar-header {
+  color: white;
+  margin-left: -55px;
+}
+
+.alert {
+  margin-bottom: 1px;
+  min-height: 35px;
+  line-height: 35px;
+  padding: 0px 35px;
+  position: fixed;
+  width: 100%;
+  top: 70px;
+  left: 0;
+}
+
+nav.scroll {
+  background-color: #4056a1;
+  color: #eef;
+}
+
+/* Write desktop only styles here */
+@media only screen and (min-width: 575px) {
+}

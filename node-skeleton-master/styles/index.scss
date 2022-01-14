@@ -1,0 +1,116 @@
+main {
+  margin: auto;
+  padding-left: 75px;
+  padding-right: 50px;
+}
+
+body {
+  margin-top: 8em;
+  background: -webkit-linear-gradient(to left, #2c5364, #203a43, #0f2027);
+  /* Chrome 10-25, Safari 5.1-6 */
+  background: linear-gradient(to left, #2c5364, #203a43, #0f2027);
+  /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+}
+
+.password_card {
+  display: flex;
+  flex-direction: column;
+  width: 30%;
+  min-width: 300px;
+  max-width: 30%;
+  padding: 20px;
+}
+
+.password_card:hover {
+  background: rgb(240, 240, 240); /* make this whatever you want */
+}
+
+.flex-container {
+  margin-top: 25px;
+  margin-bottom: 25px;
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.button-container {
+  display: flex;
+  flex-direction: row;
+}
+
+h5 {
+  margin-top: 7px;
+  margin-bottom: 7px;
+  margin-left: 2px;
+}
+
+h4 {
+  margin-left: 2px;
+}
+
+h5 {
+  font-family: "Montserrat", sans-serif;
+  margin-bottom: 5px;
+}
+
+h5.navbar-header {
+  color: white;
+  margin-left: -60px;
+}
+
+h3 {
+  font-family: "Montserrat", sans-serif;
+  margin-left: 42px;
+  font-size: 32px;
+}
+
+button {
+  margin-right: 10px;
+  margin-top: 12px;
+  margin-bottom: 5px;
+  min-width: 65px;
+}
+
+/* https://stackoverflow.com/questions/39811673/change-the-height-of-ui-bootstrap-alert */
+.alert {
+  margin-bottom: 1px;
+  min-height: 35px;
+  line-height: 35px;
+  padding: 0px 35px;
+  position: fixed;
+  width: 100%;
+  top: 70px;
+  left: 0;
+}
+
+.alert p {
+  margin: 4px 0;
+}
+
+.password_card {
+  margin-left: 20px;
+  margin-right: 20px;
+  margin-top: 15px;
+  margin-bottom: 15px;
+  border-radius: 35px;
+}
+
+.button-container {
+  margin-top: 6px;
+}
+
+.input {
+  margin-top: 10px;
+}
+
+a.nav-link {
+  margin-left: 10px;
+}
+
+/* Write desktop only styles here */
+@media only screen and (max-width: 575px) {
+  h5.navbar-header {
+    color: white;
+    margin-left: -60px;
+    margin-bottom: 15px;
+  }
+}
