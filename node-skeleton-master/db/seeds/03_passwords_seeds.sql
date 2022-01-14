@@ -8,7 +8,7 @@
 -- (3, 3, '$uperB', 'www.td-bank.com', 'banking', 2, now(), now()),
 -- (4, 3,'Net$uperB', 'www.netflix.com', 'entertainment', 2, now(), now());
 INSERT INTO passwords (id, user_id, organisation_id, category, url, password_text) VALUES (1, 1, 1, 'social', 'www.facebook.com', 'l987345sdsa7');
-INSERT INTO passwords (id, user_id, organisation_id, category, url, password_text) VALUES (2, 1, 1, 'work related', 'www.xtapadmin.com', '&h2346s^');
+INSERT INTO passwords (id, user_id, organisation_id, category, url, password_text) VALUES (2, 1, 1, 'work related', 'www.discordadmin.com', '&h2346s^');
 INSERT INTO passwords (id, user_id, organisation_id, category, url, password_text) VALUES (3, 1, 1, 'social', 'www.reddit.com', 'dl1246s');
 INSERT INTO passwords (id, user_id, organisation_id, category, url, password_text) VALUES (4, 1, 2, 'work related', 'www.amazonworklogin.com', '09asdfhsdd');
 INSERT INTO passwords (id, user_id, organisation_id, category, url, password_text) VALUES (5, 2, 3, 'entertainment', 'www.youtube.com', 'fkjsdfhs8');
