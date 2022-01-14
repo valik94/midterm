@@ -1,0 +1,109 @@
+<!--header which contains boostrap for our navbar worked on by brandon & jacob-->
+<!-- Top nav bar (fixed) -->
+<!-- https://www.youtube.com/watch?v=23bpce-5s8I -->
+<head>
+  <link
+    rel="stylesheet"
+    href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css"
+    integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS"
+    crossorigin="anonymous"
+  />
+  <!-- <link rel="stylesheet" href="/styles/login.css" type="text/css" /> -->
+  <link rel="stylesheet" href="../styles/header.css" type="text/css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Raleway&family=Spectral+SC:wght@500&family=Syncopate:wght@700&display=swap"
+    rel="stylesheet"
+  />
+  <script
+    src="https://code.jquery.com/jquery-3.5.1.js"
+    integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc="
+    crossorigin="anonymous"
+  ></script>
+  <script
+    src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+    integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+    crossorigin="anonymous"
+  ></script>
+  <script
+    src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+    integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+    crossorigin="anonymous"
+  ></script>
+  <script src="../scripts/login.js"></script>
+</head>
+<header>
+  <!-- navbar CSS -->
+  <nav
+    class="navbar navbar-expand-sm navbar-dark"
+  >
+      <% if (value) { %>
+        <a href="/" class="navbar-password">PassworKeepR</a>
+        <button
+          class="navbar-toggler"
+          type="button"
+          data-toggle="collapse"
+          data-target="#navbarMenu"
+        >
+          <span class="navbar-toggler-icon"></span>
+        </button>
+      <div class="collapse navbar-collapse" id="navbarMenu">
+        <ul class="navbar-nav mr-auto">
+          <li class="nav-item">
+            <a href="/password_gen" class="nav-link"> New Password </a>
+          </li>
+        </ul>
+        <h5 class="navbar-header" style="padding-left: 3em; padding-right: 1em">
+          Logged in
+        </h5>
+        <form class="logout-button" action="/logout" method="POST">
+          <button class="btn btn-outline-light" type="submit">Logout</button>
+        </form>
+      </div>
+    </div>
+    <% } else{%>
+      <div style="font-family:Raleway;">
+        <a href="/" style="font-size:45px;margin-left:25%"
+        class="navbar-password">PassworKeepR</a>
+      <button
+        class="navbar-toggler"
+        type="button"
+        data-toggle="collapse"
+        data-target="#navbarMenu"
+      >
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      </div>
+    <div class="login">
+      <div class="form-group">
+        <input
+        style="margin-top:7%;padding:.5% 0%;";
+          autocomplete="off"
+          autofocus
+          class="form-control"
+          id="email"
+          name="email"
+          placeholder="email"
+          type="email"
+        />
+      </div>
+      <div class="form-group">
+        <input
+        style="margin-top:7%;width:100%;margin-left:15%;padding:.5% 30% .5% 0%;"
+          class="form-control"
+          name="password"
+          id="password"
+          placeholder="master password"
+          type="password"
+        />
+      </div>
+      <button class="btn btn-outline-warning" style="margin-bottom:4%; margin-left:10%;border-radius: 5px;
+      width: 25%;border-color:white;
+      font-family: Raleway;" id="login_button" type="submit">
+        Login
+      </button>
+    </div>
+    <%}%>
+  </nav>
+</header>
