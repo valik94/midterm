@@ -49,7 +49,6 @@ app.use(express.static("public")); //sets static directory if you want ot read i
 // Note: Feel free to replace the example routes below with your own
 const testRoutes = require('./routes/test')
 const usersRoutes = require("./routes/users"); //users routes from users.js --> userRoutes is a function that is exported
-const widgetsRoutes = require("./routes/widgets"); //widgets routes from widgets.js --> widgetsRoutes is a function that is exported
 
 const loginRoutes = require("./routes/login");
 const logoutRoutes = require("./routes/logout");
@@ -65,8 +64,6 @@ const res = require("express/lib/response");
 // Mount all resource routes
 // Note: Feel free to replace the example routes below with your own
 // app.use("/api/users", usersRoutes(db));
-app.use("/api/widgets", widgetsRoutes(db));
-
 app.use("/users", usersRoutes(db));
 app.use("/login", loginRoutes(db));
 app.use("/logout", logoutRoutes(db));

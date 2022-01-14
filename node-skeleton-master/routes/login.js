@@ -1,6 +1,7 @@
 const express = require('express');
 const res = require('express/lib/response');
 const router  = express.Router();
+const app = express();
 const { emailExists, passwordValidator } = require("../helpers.js");
 
 /* require and use cookie session to store user ids for cookie sessions
