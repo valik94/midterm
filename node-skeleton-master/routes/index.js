@@ -1,6 +1,6 @@
 const express = require('express');
 const router  = express.Router();
-const { isAuthenticated, getPasswordsbyUsers, sortUserPasswords } = require("../helpers.js");
+const { isAuthenticated, getPasswordsByUsers, sortUserPasswords } = require("../helpers.js");
 
 
 module.exports = (db) => {
