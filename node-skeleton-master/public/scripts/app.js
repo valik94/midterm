@@ -59,16 +59,26 @@ $(() => {
   $generatePassword.on('submit', function(event) {
     event.preventDefault();
 
-    const data = $(this).serialize();
+    // const data = $(this).serialize();
     generatePassword();
   })
-  function generatePassword(data) {
+  function generatePassword() {
     return $.ajax({
-      method: "POST",
-      url: "/",
-      data
+      method: "GET",
+      url: "/generate-password",
     });
   }
+
+  const $generateNewPassword = $('#generate-password')
+  $generateNewPassword.on('submit', function(event) {
+    event.preventDefault();
+    const data = $(this).serialize();
+    $.ajax({
+      method: "POST",
+      url: "/generate-password",
+      data
+    })
+  })
 
    //TEST CODE - VAL
   console.log("ready")

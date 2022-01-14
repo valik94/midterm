@@ -82,7 +82,7 @@ const getPasswordsByUsers = function (userId, db) {
 
   if (userId) {
     const query = `
-    SELECT url, password_text, category, passwords.id, user_id, organisations_id, organisations.name
+    SELECT url, password_text, category, passwords.id, user_id, organisation_id, organisations.name
     FROM passwords
     JOIN organisations ON organisations.id = passwords.organisation_id
     WHERE passwords.user_id = ${userId} OR passwords.organisation_id IN (SELECT organisations_id FROM users_organisations WHERE user_id = ${userId});
