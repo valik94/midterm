@@ -1,19 +1,19 @@
 // Client facing scripts here
 // let userId;
 $(() => {
-  const $login = $('#login-form');
-  $login.on('submit', function(event) {
+  const $login = $("#login-form");
+  $login.on("submit", function (event) {
     event.preventDefault();
-    console.log('AAAAAAAAAAAAAAA');
+    console.log("AAAAAAAAAAAAAAA");
 
-    const email = $('#username').val();
-    const password = $('#password').val();
+    const email = $("#username").val();
+    const password = $("#password").val();
     // const data = $(this).serialize();
-    $.ajax({ method: 'POST',
-    url: '/login',
-    data: { email: email, password: password }})
-    .then(function(response) {
-
+    $.ajax({
+      method: "POST",
+      url: "dashboard",
+      data: { email: email, password: password },
+    }).then(function (response) {
       if (response.status === "Success") {
         // res.render('dashboard')
         console.log(response);
@@ -21,98 +21,96 @@ $(() => {
       } else {
         // res.redirect('/')
         console.log(response);
-
       }
     });
-
   });
 
-  const $signUp = $('#signup-form')
-  $signUp.on('submit', function(event) {
+  const $signUp = $("#signup-form");
+  $signUp.on("submit", function (event) {
     event.preventDefault();
 
     const data = $(this).serialize();
     console.log("Data", data);
-    signUp(data)
-  })
+    signUp(data);
+  });
   function signUp(data) {
     return $.ajax({
       method: "POST",
       url: "/users",
-      data
+      data,
     });
   }
 
-  const $logout = $('#lgout-btn')
-  $logout.on('submit', function(event) {
+  const $logout = $("#lgout-btn");
+  $logout.on("submit", function (event) {
     event.preventDefault();
     logOut();
-  })
+  });
   function logOut() {
     return $.ajax({
       method: "POST",
       url: "/logout",
-    })
+    });
   }
 
-  const $generatePassword = $('#generate')
-  $generatePassword.on('submit', function(event) {
+  const $generatePassword = $("#generate");
+  $generatePassword.on("submit", function (event) {
     event.preventDefault();
 
     const data = $(this).serialize();
     generatePassword();
-  })
+  });
   function generatePassword(data) {
     return $.ajax({
       method: "POST",
       url: "/",
-      data
+      data,
     });
   }
 
-   //TEST CODE - VAL
-  console.log("ready")
-//   console.log("ready")
-//   $("#Signup").on("submit",submitForm) //Signup button
-//   $("#lgn-btn").on("submit", login) //login button
-//   $("#Signup").on("submit",submitForm) //Signup button
-//   $("#lgn-btn").on("submit", login) //login button
+  //TEST CODE - VAL
+  console.log("ready");
+  //   console.log("ready")
+  //   $("#Signup").on("submit",submitForm) //Signup button
+  //   $("#lgn-btn").on("submit", login) //login button
+  //   $("#Signup").on("submit",submitForm) //Signup button
+  //   $("#lgn-btn").on("submit", login) //login button
 
-//   const Login = function(){
-//     console.log('Login clicked!');
+  //   const Login = function(){
+  //     console.log('Login clicked!');
 
-//   $.get("/api/users/:id")
-//   .then(data =>{
-//     console.log('My data is:', data);
-//     renderUsers(data.users)
-//   });
-// }
+  //   $.get("/api/users/:id")
+  //   .then(data =>{
+  //     console.log('My data is:', data);
+  //     renderUsers(data.users)
+  //   });
+  // }
 
-//   const Login = function(){
-//     console.log('Login clicked!');
+  //   const Login = function(){
+  //     console.log('Login clicked!');
 
-//   $.get("/api/users/:id")
-//   .then(data =>{
-//     console.log('My data is:', data);
-//     renderUsers(data.users)
-//   });
-// }
+  //   $.get("/api/users/:id")
+  //   .then(data =>{
+  //     console.log('My data is:', data);
+  //     renderUsers(data.users)
+  //   });
+  // }
 
-//   const submitForm = function(){
-//     console.log('Sign up clicked!');
+  //   const submitForm = function(){
+  //     console.log('Sign up clicked!');
 
-//   $.get("/api/users")
-//   .then(data =>{
-//     console.log('My data is:', data);
-//     renderUsers(data.users)
-//   });
-// }
+  //   $.get("/api/users")
+  //   .then(data =>{
+  //     console.log('My data is:', data);
+  //     renderUsers(data.users)
+  //   });
+  // }
 
-// const renderUsers = function(users){
-//   const $container = $("#lgn-btn");
-//   $container.empty();
-//   for (const user of users){
-//     $container.append(`<li>${user.email}</li>`);
-//   }
-// }
+  // const renderUsers = function(users){
+  //   const $container = $("#lgn-btn");
+  //   $container.empty();
+  //   for (const user of users){
+  //     $container.append(`<li>${user.email}</li>`);
+  //   }
+  // }
 });
