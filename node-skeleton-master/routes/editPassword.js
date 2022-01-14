@@ -1,6 +1,6 @@
 const express = require('express');
 const app = express();
-const editPasswordRoute = express.Router();
+const router = express.Router();
 const { editPasswordFromDb, getEditedPassword } = require("../helpers.js");
 
 
@@ -17,7 +17,7 @@ const { editPasswordFromDb, getEditedPassword } = require("../helpers.js");
  module.exports = (db) => {
 
 // POST route
-editPasswordRoute.post("/", (req, res) => { //create post route for editPassword
+router.post("/", (req, res) => { //create post route for editPassword
   const buttonId = req.body.clicked_button; //target clicked_button key upon request.body.clicked_button store value in buttonId
   const passwordText = req.body.password_text; //target password_text and store its value in passwordText
   console.log("passwordText", passwordText);

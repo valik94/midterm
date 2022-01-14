@@ -17,7 +17,7 @@ $(() => {
       if (response.status === "Success") {
         // res.render('dashboard')
         console.log(response);
-        window.location.replace("/dashboard")
+        window.location = response.redirect;
       } else {
         // res.redirect('/')
         console.log(response);
@@ -27,18 +27,18 @@ $(() => {
 
   });
 
-  const $signUp = $('#signup')
+  const $signUp = $('#signup-form')
   $signUp.on('submit', function(event) {
     event.preventDefault();
-    console.log("Hello");
 
     const data = $(this).serialize();
+    console.log("Data", data);
     signUp(data)
   })
   function signUp(data) {
     return $.ajax({
       method: "POST",
-      url: "/passwords",
+      url: "/users",
       data
     });
   }
@@ -71,24 +71,40 @@ $(() => {
   }
 
    //TEST CODE - VAL
+<<<<<<< Updated upstream
   console.log("ready")
   $("#lgn-btn").on("submit",submitForm)
+=======
+//   console.log("ready")
+//   $("#Signup").on("submit",submitForm) //Signup button
+//   $("#lgn-btn").on("submit", login) //login button
 
-  const submitForm = function(){
-    console.log('Sign up clicked!');
+//   const Login = function(){
+//     console.log('Login clicked!');
 
-  $.get("/api/users")
-  .then(data =>{
-    console.log('My data is:', data);
-    renderUsers(data.users)
-  });
-}
+//   $.get("/api/users/:id")
+//   .then(data =>{
+//     console.log('My data is:', data);
+//     renderUsers(data.users)
+//   });
+// }
+>>>>>>> Stashed changes
 
-const renderUsers = function(users){
-  const $container = $("#lgn-btn");
-  $container.empty();
-  for (const user of users){
-    $container.append(`<li>${user.email}</li>`);
-  }
-}
+//   const submitForm = function(){
+//     console.log('Sign up clicked!');
+
+//   $.get("/api/users")
+//   .then(data =>{
+//     console.log('My data is:', data);
+//     renderUsers(data.users)
+//   });
+// }
+
+// const renderUsers = function(users){
+//   const $container = $("#lgn-btn");
+//   $container.empty();
+//   for (const user of users){
+//     $container.append(`<li>${user.email}</li>`);
+//   }
+// }
 });

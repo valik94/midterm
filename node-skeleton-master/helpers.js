@@ -1,16 +1,16 @@
 // These are helper functions file
 
 // Generates a random password based on length inputed by the user
-const generatePassword = function() {
-  const userInput = process.argv[2]
-  let length = 8,
-      charset = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789",
-      retVal = "";
-  for (const i = 0, n = charset.length; i < length; ++i) {
-      retVal += charset.charAt(Math.floor(Math.random() * n));
-  }
-  return retVal;
-}
+// const generatePassword = function() {
+//   const userInput = process.argv[2]
+//   let length = 8,
+//       charset = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789",
+//       retVal = "";
+//   for (const i = 0, n = charset.length; i < length; ++i) {
+//       retVal += charset.charAt(Math.floor(Math.random() * n));
+//   }
+//   return retVal;
+// }
 
 /* helper function to check if a users email address already exists in our database - FIXED!
  * return a promise with false inside it if no userId exists */
@@ -78,14 +78,14 @@ const isAuthenticated = function (userId, db) {
 };
 
 // helper function to get all passwords by a userID and render it to the index page client side eventually
-const getPasswordsbyUsers = function (userId, db) {
+const getPasswordsByUsers = function (userId, db) {
 
   if (userId) {
     const query = `
     SELECT url, password_text, category, passwords.id, user_id, organisations_id, organisations.name
     FROM passwords
-    JOIN organisations ON organisations.id = passwords.organisations_id
-    WHERE passwords.user_id = ${userId} OR passwords.organisations_id IN (SELECT organisations_id FROM users_organisations WHERE user_id = ${userId});
+    JOIN organisations ON organisations.id = passwords.organisation_id
+    WHERE passwords.user_id = ${userId} OR passwords.organisation_id IN (SELECT organisations_id FROM users_organisations WHERE user_id = ${userId});
     `;
     return db.query(query)
       .then(res => {
@@ -184,7 +184,7 @@ module.exports = {
   emailExists,
   passwordValidator,
   isAuthenticated,
-  getPasswordsbyUsers,
+  getPasswordsByUsers,
   getUserOrganizations,
   deletePasswordFromDb,
   editPasswordFromDb,
@@ -192,5 +192,5 @@ module.exports = {
   sortUserPasswords,
   newPasswordToDatabase,
   getOrgIdFromName,
-  generatePassword
+  // generatePassword
  };

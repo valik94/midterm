@@ -15,7 +15,7 @@ module.exports = (db) => {
       if (!value) {
         res.redirect('/login');
       } else {
-        getPasswordsbyUsers(value, db)
+        getPasswordsByUsers(value, db)
         .then((passwordsByUser) => {
           const sortedpasswordsByUser = sortUserPasswords(passwordsByUser, db);
           console.log('ALL THE PASSWORDS HERE: ', sortedpasswordsByUser);

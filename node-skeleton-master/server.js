@@ -69,6 +69,7 @@ app.use("/api/widgets", widgetsRoutes(db));
 app.use("/users", usersRoutes(db));
 app.use("/login", loginRoutes(db));
 app.use("/logout", logoutRoutes(db));
+app.use("/", indexRoutes(db));
 
 app.use("/logout", passwordsStorageRoutes(db));
 app.use("/logout", passwordGeneratorRoutes(db));
@@ -90,13 +91,13 @@ app.use("/test", testRoutes(db)); //usersRoutes is a function and when it runs i
 // Warning: avoid creating more routes in this file!
 // Separate them into separate routes files (see above).
 
-app.get("/", (req, res) => {
-  res.render("homepage");
-});
+// app.get("/", (req, res) => {
+//   res.render("homepage");
+// });
 
-app.get("/dashboard", (req, res) => {
-  res.render("dashboard", { users: [] })
-})
+// app.get("/dashboard", (req, res) => {
+//   res.render("dashboard", { users: [] })
+// })
 
 
 // app.post("/passwords", (req, res)=>{
