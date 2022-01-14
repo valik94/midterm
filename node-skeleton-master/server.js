@@ -72,12 +72,11 @@ app.use("/login", loginRoutes(db));
 app.use("/logout", logoutRoutes(db));
 app.use("/", indexRoutes(db));
 
-app.use("/logout", passwordsStorageRoutes(db));
-app.use("/logout", passwordGeneratorRoutes(db));
-app.use("/logout", editPasswordRoutes(db));
+app.use("/store-password", passwordsStorageRoutes(db));
+app.use("/generate-password", passwordGeneratorRoutes(db));
+app.use("/edit-password", editPasswordRoutes(db));
 
 // app.use("/dashboard", indexRoutes(db));
-
 
 /*
 app.use convention ("route", function )

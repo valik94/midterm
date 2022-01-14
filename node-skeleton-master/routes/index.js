@@ -1,5 +1,7 @@
 const express = require('express');
 const router  = express.Router();
+const app = express();
+app.set("view engine", "ejs"); //FOR FRONTEND HEADER ON EJS
 const { isAuthenticated, getPasswordsByUsers, sortUserPasswords } = require("../helpers.js");
 
 
@@ -20,7 +22,7 @@ module.exports = (db) => {
           const sortedpasswordsByUser = sortUserPasswords(passwordsByUser, db);
           console.log('ALL THE PASSWORDS HERE: ', sortedpasswordsByUser);
           const templateVars = { value: id, users: sortedpasswordsByUser };
-          res.render("dashboard", templateVars);
+          res.render("dashboard", templateVars); //THIS SENDS TO DASHBOARD.EJS INSTEAD OF INDEX.EJS
         }).catch(error => {
           console.log(error)
         });
@@ -29,3 +31,4 @@ module.exports = (db) => {
   });
   return router;
   };
+

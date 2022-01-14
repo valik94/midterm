@@ -3,6 +3,16 @@ const res = require('express/lib/response');
 const router  = express.Router();
 const { emailExists, passwordValidator } = require("../helpers.js");
 
+/* require and use cookie session to store user ids for cookie sessions
+ * https://www.npmjs.com/package/cookie-session */
+ const cookieSession = require('cookie-session');
+ app.use(cookieSession({
+   name: 'session',
+   keys: ['key1'],
+
+   maxAge: 24 * 60 * 60 * 1000
+ }));
+
 
 module.exports = (db) => {
 
@@ -10,18 +20,24 @@ module.exports = (db) => {
   //   res.render("dashboard");
   // });
   router.get('/', (req, res) => {
-    res.render('homepage')
+    const templateVars = { value: false };
+    res.render("homepage", templateVars);
   })
 
   router.post("/", (req, res) => {
     const { email, password } = req.body;
+    const errors = {
+      email: "Must provide email!",
+      password: "Must provide password!",
+      emailOrPwinvalid: "Email or Password is invalid!",
+    }; //This is for the popup errors
     console.log('TEST: router.post', req.body);
 
     if (!email) {
-      res.send("Must provide email!");
+      res.send(errors.email);
       return;
     } else if (!password) {
-      res.send("Must provide password!");
+      res.send(errors.password);
       return;
     }
 
@@ -31,7 +47,7 @@ module.exports = (db) => {
     validUserEmail.then((value) => {
 
       if (!value) {
-        res.send("Email or Password is invalid!");
+        res.send(errors.emailOrPwinvalid);
         throw new Error('email does not exist');
       } else {
         return passwordValidator(password, email, db);
@@ -39,8 +55,8 @@ module.exports = (db) => {
     }).then((value) => {
 
       if (!value) {
-        res.send("Email or Password is invalid!");
-        throw new Error('incorrect password');
+        res.send(errors.emailOrPwinvalid);
+        throw new Error('password does not exist');
       } else {
         req.session.user_id = value;
         // res.render('dashboard')
