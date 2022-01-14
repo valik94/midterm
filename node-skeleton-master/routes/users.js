@@ -92,7 +92,7 @@ module.exports = (db) => {
         req.body.email,
         req.body.master_password,
         req.body.organisation_id,
-        req.body.created_at,
+        req.body.date,
       ]
     )
       .then((result) => {
@@ -104,7 +104,7 @@ module.exports = (db) => {
     console.log(req.body.email);
     console.log(req.body.master_password);
     console.log(req.body.organisation_id);
-    console.log(req.body.created_at);
+    console.log(req.body.date);
     res.send("Hello Passwords Page");
   });
 

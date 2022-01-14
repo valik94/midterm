@@ -1,55 +1,65 @@
-.header {
+.navbar-password {
+  color: rgb(56, 56, 56);
+  font-size: 20px;
+  font-size: 45px;
+  margin-left: 4%;
+}
+
+.navbar-password:hover {
+  text-decoration: none;
+  color: rgb(168, 168, 168);
+}
+
+.navbar {
+  min-height: 70px;
+  position: fixed;
+  top: 0;
+  width: 100%;
+}
+
+.navbar-light .navbar-nav .nav-link {
+  color: rgba(0, 0, 0, 0.5);
+  margin-left: 12px;
+}
+
+.logout-button {
+  margin-top: -8px;
+  margin-left: 3px;
+}
+
+.navbar .navbar-nav a.nav-link {
+  margin-top: 4px;
+  color: white;
+}
+
+a.navbar-password {
+  color: white;
+}
+
+.navbar-header {
+  margin-bottom: 5px;
+}
+
+h5.navbar-header {
+  color: white;
+}
+
+.header-button {
+  margin: 0;
+}
+
+button {
+  margin-right: 10px;
+  margin-top: 12px;
+  margin-bottom: 5px;
+  min-width: 65px;
+}
+.login {
   display: flex;
-  align-items: center;
-  justify-content: space-between;
-  background: #0f2027; /* fallback for old browsers */
-  background: -webkit-linear-gradient(
-    to left,
-    #2c5364,
-    #203a43,
-    #0f2027
-  ); /* Chrome 10-25, Safari 5.1-6 */
-  background: linear-gradient(
-    to left,
-    #2c5364,
-    #203a43,
-    #0f2027
-  ); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
-  color: #c0d6df;
-  border-radius: 2px;
-  font-family: "Raleway", sans-serif;
+  margin-left: 50%;
+  width: 60%;
 }
-.main-logo {
-  margin: 1% 0% 0% 6.5%;
-}
-.form-data {
-  margin-right: 2%;
-  width: 40%;
-}
-.form-data * {
-  margin-right: 1%;
-}
-#username {
-  border-radius: 5px;
-  padding: 1.5% 0%;
-}
-
+#email,
 #password {
-  padding: 1.5% 0%;
-  border-radius: 5px;
-}
-
-#lgn-btn {
-  padding: 1.5% 0%;
-  border-radius: 5px;
-  width: 33%;
-  font-family: "Raleway", sans-serif;
-}
-@media (max-width: 1300px) {
-  .form-data input {
-    width: 30%;
-  }
-  .main-logo {
-    margin-left: 1.7%;
-  }
+  margin-right: 2%;
 }

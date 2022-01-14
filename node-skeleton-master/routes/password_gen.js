@@ -20,6 +20,8 @@ app.use(cookieSession({
   maxAge: 24 * 60 * 60 * 1000
 }));
 
+//Why router and passwordRouter is used here both?
+
 module.exports = (db) => {
 /* get routes for password generator page
  * query to db for the current logged in user, and check what orginizations they are part of
@@ -31,7 +33,7 @@ router.get("/", (req, res) => {
   .then((userId) => {
     console.log("router.get password generator", userId);
     if (!userId) {
-      res.redirect('/login');
+      res.redirect('/homepage');
     }
     return getUserOrganizations(userId, db);
   })
@@ -52,7 +54,7 @@ router.post("/", (req, res) => {
   const id = req.session.user_id;
 
   if (req.body.length) {
-  const passwordGenerator = function (db) {
+  const passwordGenerator = function () { //removed 'db' form function passing parameter
 
     if (req.body.uppercase === 'true') {
       uppercaseBoolean = true;
