@@ -1,17 +1,18 @@
 // Client facing scripts here
 // let userId;
 $(() => {
-  const $login = $('#login-form');
-  $login.on('submit', function(event) {
+  const $login = $('#login_button');
+  $login.on('click', function(event) {
     event.preventDefault();
     console.log('AAAAAAAAAAAAAAA');
 
-    const email = $('#username').val();
+    const email = $('#login-email').val();
     const password = $('#password').val();
-    // const data = $(this).serialize();
-    $.ajax({ method: 'POST',
-    url: '/login',
-    data: { email: email, password: password }})
+
+    $.ajax({
+      method: 'POST',
+      url: '/login',
+      data: { email: email, password: password }})
     .then(function(response) {
 
       if (response.status === "Success") {
@@ -43,7 +44,7 @@ $(() => {
     });
   }
 
-  const $logout = $('#lgout-btn')
+  const $logout = $('#logout-button')
   $logout.on('submit', function(event) {
     event.preventDefault();
     logOut();
@@ -55,20 +56,31 @@ $(() => {
     })
   }
 
-  const $generatePassword = $('#generate')
-  $generatePassword.on('submit', function(event) {
-    event.preventDefault();
+  // const $generatePassword = $('#generate')
+  // $generatePassword.on('click', function(event) {
+  //   event.preventDefault();
+  //   console.log("Create new password");
 
+  //   // const data = $(this).serialize();
+  //   generatePassword();
+  // })
+  // function generatePassword() {
+  //   return $.ajax({
+  //     method: "GET",
+  //     url: "/generate-password",
+  //   });
+  // }
+
+  const $generateNewPassword = $('#generate-password')
+  $generateNewPassword.on('submit', function(event) {
+    event.preventDefault();
     const data = $(this).serialize();
-    generatePassword();
-  })
-  function generatePassword(data) {
-    return $.ajax({
+    $.ajax({
       method: "POST",
-      url: "/",
+      url: "/generate-password",
       data
-    });
-  }
+    })
+  })
 
    //TEST CODE - VAL
   console.log("ready")
