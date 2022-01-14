@@ -71,11 +71,10 @@ $(() => {
   }
 
    //TEST CODE - VAL
-<<<<<<< Updated upstream
   console.log("ready")
-  $("#lgn-btn").on("submit",submitForm)
-=======
 //   console.log("ready")
+//   $("#Signup").on("submit",submitForm) //Signup button
+//   $("#lgn-btn").on("submit", login) //login button
 //   $("#Signup").on("submit",submitForm) //Signup button
 //   $("#lgn-btn").on("submit", login) //login button
 
@@ -88,7 +87,16 @@ $(() => {
 //     renderUsers(data.users)
 //   });
 // }
->>>>>>> Stashed changes
+
+//   const Login = function(){
+//     console.log('Login clicked!');
+
+//   $.get("/api/users/:id")
+//   .then(data =>{
+//     console.log('My data is:', data);
+//     renderUsers(data.users)
+//   });
+// }
 
 //   const submitForm = function(){
 //     console.log('Sign up clicked!');
