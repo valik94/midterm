@@ -1,11 +1,12 @@
 const express = require('express');
 const app = express();
 const loginRoute = express.Router();
-const { emailExists, passwordValidator } = require("../helpers.js");
+const { isAuthenticated, emailExists, passwordValidator } = require("../helpers.js");
 
 /* require and use cookie session to store user ids for cookie sessions
  * https://www.npmjs.com/package/cookie-session */
 const cookieSession = require('cookie-session');
+const db = require('../db/dbConn.js');
 app.use(cookieSession({
   name: 'session',
   keys: ['key1'],
@@ -13,11 +14,20 @@ app.use(cookieSession({
   maxAge: 24 * 60 * 60 * 1000
 }));
 
-/* GET route
- * https://stackoverflow.com/questions/29941208/express-error-typeerror-router-use-requires-middleware-function-but-got-a-o */
+
+/* GET route*/
 loginRoute.get("/", (req, res) => {
-  const templateVars = { value: false };
-  res.render("login", templateVars);
+  const id = req.session.user_id;
+  const idIsExisting = isAuthenticated(id, db);
+  idIsExisting.then((value) => {
+
+    if (value) {
+      res.redirect('/index');
+    }
+    const templateVars = {value: false};
+
+  res.render('login', templateVars)
+})
 });
 
 /* POST route
@@ -41,14 +51,14 @@ loginRoute.post("/", (req, res) => {
 
   /* promise chain that will first check if the users email exists against our db and then validate their password
    * async error handling for when a username or password is invalid will happen in here - TODO */
-  let validUserEmail = emailExists(email);
+  let validUserEmail = emailExists(email, db);
   validUserEmail.then((value) => {
 
     if (!value) {
       res.send(errors.emailOrPwinvalid);
       throw new Error('email does not exist');
     } else {
-      return passwordValidator(password, email);
+      return passwordValidator(password, email, db);
     }
   }).then((value) => {
 

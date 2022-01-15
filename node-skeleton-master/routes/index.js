@@ -5,6 +5,7 @@ app.set("view engine", "ejs");
 const { isAuthenticated, getPasswordsbyUsers, sortUserPasswords } = require("../helpers.js");
 
 const cookieSession = require('cookie-session');
+const db = require('../db/dbConn.js');
 app.use(cookieSession({
   name: 'session',
   keys: ['key1'],
@@ -16,13 +17,13 @@ app.use(cookieSession({
    pass through templateVars into EJS file to render information for specific user/organisation */
 indexRoute.get("/", (req, res) => {
   const id = req.session.user_id;
-  const idIsExisting = isAuthenticated(id);
+  const idIsExisting = isAuthenticated(id, db);
   idIsExisting.then((value) => {
 
     if (!value) {
       res.redirect('/login');
     } else {
-      getPasswordsbyUsers(value)
+      getPasswordsbyUsers(value, db)
       .then((passwordsByUser) => {
         const sortedpasswordsByUser = sortUserPasswords(passwordsByUser);
         console.log('ALL THE PSWORDS HERE: ', sortedpasswordsByUser);

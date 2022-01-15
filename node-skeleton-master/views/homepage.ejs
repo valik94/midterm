@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>PasswordKeepr</title>
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+      integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh"
+      crossorigin="anonymous"
+    />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Raleway&family=Spectral+SC:wght@500&family=Syncopate:wght@700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="/vendor/normalize-4.1.1.css" type="text/css" />
+    <link rel="stylesheet" href="/vendor/border-box.css" type="text/css" />
+    <link rel="stylesheet" href="../styles/main.css" type="text/css" />
+    <link rel="stylesheet" href="../styles/header.css" type="text/css" />
+    <script type="text/javascript" src="/vendor/jquery-3.0.0.js"></script>
+    <script type="text/javascript" src="/scripts/app.js"></script>
+  </head>
+
+  <body>
+    <%- include('partials/_header') %>
+    <!-- <header class="header">
+      <h2 class="main-logo">PASSWORD KEEPER</h2>
+      <form class="form-data" id="login-form">
+        <input
+          type="text"
+          placeholder="USERNAME"
+          name="username"
+          id="username"
+        />
+        <input
+          type="password"
+          placeholder="PASSWORD"
+          name="password"
+          id="password"
+        />
+        <button id="lgn-btn" class="btn btn-outline-warning" type="submit">LOGIN</button>
+      </form>
+    </header> -->
+    <section class="body">
+      <div class="left-body-typo">
+        <p class="dont">
+          Don't be the <br />next victim <br />
+          of a<br />
+          ransomeware<br />
+          attack.
+        </p>
+        <h3 class="h2-main">
+          Keeper protects you, your<br />
+          family and business from<br />
+          password-related data breaches <br />
+          and cyberthreats.
+        </h3>
+      </div>
+      <div class="right-body-registration">
+        <p class="r">REGISTRATION</p>
+        <p class="iqande">Its quick and easy</p>
+        <form action="/passwords" method="POST" id="signup-form">
+          <div class="reg-form">
+            <!-- <label for="name">Enter Your Name: </label><br />
+            <input type="text" placeholder="name" name="name" id="name" /> -->
+            <!-- <label for="usr-rgstn">Enter Your Username: </label><br />
+            <input
+              type="text"
+              placeholder="username"
+              name="username"
+              id="usr-rgstn"
+            /> -->
+            <label for="email">Enter Your Email: </label><br />
+            <input type="email" placeholder="email" name="email" id="register-email" />
+            <label for="new-password">Enter Your Password: </label><br />
+            <input
+              type="password"
+              placeholder="password"
+              name="master_password"
+              id="new-password"
+            />
+            <label for="organisation-id">Enter organisation_id: </label><br />
+            <input
+              type="text"
+              placeholder="organisation_id"
+              name="organisation_id"
+              id="organisation-id"
+            />
+            <label for="date">Enter today's date:</label><br />
+            <input
+              type="text"
+              placeholder="YYYY-MM-DD"
+              name="date"
+              id="date"
+            />
+            <br />
+          </div>
+          <button id="signup" class="btn btn-outline-warning">SIGN UP!</button>
+        </form>
+      </div>
+    </section>
+  </body>
+</html>
