@@ -1,3 +1,5 @@
+# PasswordKeeper
+
 # Getting Started
 
 1. Create the .env by using .env.example as a reference: cp .env.example .env
@@ -18,8 +20,6 @@
 - Note: nodemon is used, so you should not have to restart your server
 
 8. Visit http://localhost:8080/
-
-# PasswordKeeper
 
 # User Stories
 
