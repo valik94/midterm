@@ -23,10 +23,10 @@ app.use(
 );
 //  old way of connecting to PG db from server.js file before modularizing this process
 //  * PG database client/connection setup
-// const { Pool } = require("pg");
-// const dbParams = require("./lib/db.js");
-// const db = new Pool(dbParams);
-// db.connect();
+const { Pool } = require("pg");
+const dbParams = require("./lib/db.js");
+const db = new Pool(dbParams);
+db.connect();
 
 /* load the logger first so all (static) HTTP requests are logged to STDOUT
  * 'dev' = Concise output colored by response status for development use.
@@ -74,4 +74,22 @@ app.use("/editPassword", editPasswordRoute);
 // app listener
 app.listen(PORT, () => {
   console.log(`Example app listening on port ${PORT}`);
+});
+
+app.post("/registration", (req, res) => {
+  const { username, password } = req.body;
+  db.query(
+    `INSERT INTO users (email,master_password)
+  VALUES ('${username}', '${password}');
+  `
+  )
+    .then((result) => {
+      console.log(`result is:`, result);
+    })
+    .catch((err) => {
+      console.log(err);
+    });
+  console.log(req.body.username);
+  console.log(req.body.password);
+  res.redirect("/login");
 });

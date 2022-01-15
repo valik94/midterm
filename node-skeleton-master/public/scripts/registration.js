@@ -1,15 +1,15 @@
-  const $signUp = $("#signup-form");
-  $signUp.on("submit", function (event) {
-    event.preventDefault();
+const $signUp = $("#Signup");
+$signUp.on("click", function (event) {
+  event.preventDefault();
 
-    const data = $(this).serialize();
-    console.log("Data", data);
-    signUp(data);
+  const data = $(this).serialize();
+  console.log("Data", data);
+  signUp(data);
+});
+function signUp(data) {
+  return $.ajax({
+    method: "POST",
+    url: "/registration",
+    data,
   });
-  function signUp(data) {
-    return $.ajax({
-      method: "POST",
-      url: "/users",
-      data,
-    });
-  }
+}

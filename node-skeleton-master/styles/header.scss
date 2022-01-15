@@ -63,7 +63,13 @@ button {
   margin-left: 50%;
   width: 60%;
 }
-#email,
-#password {
-  margin-right: 2%;
+#email{
+  margin-top:7%;padding:.5% 0%;
+}
+@media (max-width:1366px){
+  *{border:1px solid green}
+  #email{
+    background:red;
+
+  }
 }
