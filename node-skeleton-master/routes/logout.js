@@ -1,7 +1,9 @@
 const express = require('express');
-const router  = express.Router();
 const app = express();
+const logoutRoute = express.Router();
 
+/* require and use cookie session to store user ids for cookie sessions
+ * https://www.npmjs.com/package/cookie-session */
 const cookieSession = require('cookie-session');
 app.use(cookieSession({
   name: 'session',
@@ -10,12 +12,11 @@ app.use(cookieSession({
   maxAge: 24 * 60 * 60 * 1000
 }));
 
-module.exports = (db) => {
+/* POST route
+ * https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise/then */
+logoutRoute.post("/", (req, res) => {
+  req.session = null;
+  res.redirect('/login');
+});
 
-  //If anything is missing in this POST route its probably missing passing it db.
-  router.post("/", (req, res) => {
-    req.session = null;
-    res.redirect('/');
-  });
-  return router;
-};
+module.exports = logoutRoute;

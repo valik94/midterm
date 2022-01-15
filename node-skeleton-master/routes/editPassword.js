@@ -1,33 +1,31 @@
 const express = require('express');
 const app = express();
-const router = express.Router();
+const editPasswordRoute = express.Router();
 const { editPasswordFromDb, getEditedPassword } = require("../helpers.js");
 
 
 /* require and use cookie session to store user ids for cookie sessions
  * https://www.npmjs.com/package/cookie-session */
- const cookieSession = require('cookie-session'); //import cookie session
- app.use(cookieSession({ //set random key and value for cooie
+ const cookieSession = require('cookie-session');
+ app.use(cookieSession({
    name: 'session',
    keys: ['key1'],
 
    maxAge: 24 * 60 * 60 * 1000
  }));
 
- module.exports = (db) => {
-
 // POST route
-router.post("/", (req, res) => { //create post route for editPassword
-  const buttonId = req.body.clicked_button; //target clicked_button key upon request.body.clicked_button store value in buttonId
-  const passwordText = req.body.password_text; //target password_text and store its value in passwordText
+editPasswordRoute.post("/", (req, res) => {
+  const buttonId = req.body.clicked_button;
+  const passwordText = req.body.password_text;
   console.log("passwordText", passwordText);
-  let editedPassword = editPasswordFromDb(buttonId, passwordText, db); //passed to helper function and returns the query result from DB table users where email=userEmail
-  editedPassword.then(() => { //created a promise on the returned value
-    return getEditedPassword(buttonId, db); //return query from DB table users DB table users where email=userEmail
+  let editedPassword = editPasswordFromDb(buttonId, passwordText);
+  editedPassword.then(() => {
+    return getEditedPassword(buttonId);
   }).then((value) => {
-    const updatedPassword = value; //assign this value to updatedPassword
-    res.send(updatedPassword.rows[0].password_text) //send to browser updatedPassword.rows[0].password_text
+    const updatedPassword = value;
+    res.send(updatedPassword.rows[0].password_text)
   });
 });
-return router;
- }
+
+module.exports = editPasswordRoute;

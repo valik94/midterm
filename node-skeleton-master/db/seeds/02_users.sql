@@ -1,5 +1,4 @@
--- Users table seeds here (Example)
-INSERT INTO users (email, master_password, organisation_id, created_at) VALUES
-('alice@wonderland.com', 'SecretPass', 1, now()),
-('Kira@gmail.com', 'SuperPa$$', 2, now()),
-('BobK@gmail.com', '$uperB', 2, now());
+INSERT INTO users (email, master_password) VALUES ('prabhu@gmail.com', '123');
+INSERT INTO users (email, master_password) VALUES ('valentin@gmail.com', '321');
+INSERT INTO users (email, master_password) VALUES ('michael@gmail.com', '123');
+INSERT INTO users (email, master_password) VALUES ('lhl@gmail.com', '321');

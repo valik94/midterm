@@ -5,10 +5,12 @@
  * See: https://expressjs.com/en/guide/using-middleware.html#middleware.router
  */
 
+// include db module from dbConn.js
 const express = require('express');
-const router = express.Router();
+const passwordRouter = express.Router();
 const generator = require('generate-password');
 const app = express();
+const { db, Pool } = require('../db/dbConn');
 const { isAuthenticated, getUserOrganizations, newPasswordToDatabase, getOrgIdFromName } = require("../helpers.js");
 
 // require and use cookie session to store user ids for cookie sessions
@@ -20,28 +22,21 @@ app.use(cookieSession({
   maxAge: 24 * 60 * 60 * 1000
 }));
 
-//Why router and passwordRouter is used here both?
-
-module.exports = (db) => {
 /* get routes for password generator page
  * query to db for the current logged in user, and check what orginizations they are part of
  * send that information back to the client for the orginzation drop down menu to pick from */
-router.get("/", (req, res) => {
+passwordRouter.get("/", (req, res) => {
   const id = req.session.user_id;
-  console.log("ID", id);
-  isAuthenticated(id, db)
+
+  isAuthenticated(id)
   .then((userId) => {
-    console.log("router.get password generator", userId);
     if (!userId) {
-      res.redirect('/homepage');
+      res.redirect('/login');
     }
-    return getUserOrganizations(userId, db);
+    return getUserOrganizations(userId);
   })
   .then((usersOrgs) => {
-    console.log("router.get password generator", usersOrgs);
-
     const organisations = [...usersOrgs];
-    console.log("organisations", organisations);
     const templateVars = { value: id, organisations };
     res.render("password_gen", templateVars);
   }).catch(error => {
@@ -50,11 +45,11 @@ router.get("/", (req, res) => {
 });
 
 // POSTS routes - TODO - take in db here - TEST
-router.post("/", (req, res) => {
+passwordRouter.post("/", (req, res) => {
   const id = req.session.user_id;
 
   if (req.body.length) {
-  const passwordGenerator = function () { //removed 'db' form function passing parameter
+  const passwordGenerator = function () {
 
     if (req.body.uppercase === 'true') {
       uppercaseBoolean = true;
@@ -89,24 +84,23 @@ router.post("/", (req, res) => {
     });
   };
 
-  const thePassword = passwordGenerator(db);
+  const thePassword = passwordGenerator();
   console.log("thepassword? ", thePassword);
-  getOrgIdFromName(req.body.organisationName, db)
+  getOrgIdFromName(req.body.organisationName)
     .then((val) => {
       const orgId = val;
-      newPasswordToDatabase(id, orgId, req.body.category, req.body.url, thePassword, db);
+      newPasswordToDatabase(id, orgId, req.body.category, req.body.url, thePassword);
       res.send('This worked!');
     });
   } else {
-    getOrgIdFromName(req.body.organisationName, db)
+    getOrgIdFromName(req.body.organisationName)
     .then((val) => {
       const orgId = val;
-      newPasswordToDatabase(id, orgId, req.body.category, req.body.url, req.body.password, db);
+      newPasswordToDatabase(id, orgId, req.body.category, req.body.url, req.body.password);
       res.send('This also worked! You can submit your own password');
     });
   }
 });
-return router;
-}
+
 // export whole router
-//module.exports = passwordRouter;
+module.exports = passwordRouter;
