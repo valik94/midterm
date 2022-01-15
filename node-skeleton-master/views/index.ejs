@@ -5,14 +5,17 @@
   <!-- Bootstrap CSS -->
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css"
     integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
+    <link
+    href="https://fonts.googleapis.com/css2?family=Raleway&family=Spectral+SC:wght@500&family=Syncopate:wght@700&display=swap"
+    rel="stylesheet"
+  />
 <link rel="stylesheet" href="/styles/index.css" type="text/css" />
-<link rel="stylesheet" href="../styles/header.css" type="text/css" />
-<link rel="preconnect" href="https://fonts.gstatic.com">
-<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400&display=swap" rel="stylesheet">
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 </head>
 
-<body>
-
+<body style="font-family:Raleway">
+  <%- include('partials/_header') %>
     <script src="https://code.jquery.com/jquery-3.5.1.js"
       integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc=" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
@@ -23,17 +26,20 @@
       crossorigin="anonymous"></script>
 
     <div id="alert_placeholder"></div>
-    <main>
-      <h3>My Passwords - Also shared by your companies</h3>
+    <main style="margin-top:8%">
+      <h3 class="text-h3" style="color: white;"> My Passwords - Also shared by your companies</h3>
         <div class="flex-container">
           <% for(let user in users) { %>
             <% if (value===users[user].user_id) { %>
               <% console.log("hello!: ", users[user].user_id) %>
-              <div class="personal_passwords password_card" data-id="<%= users[user].id %>">
+              <div style="background: -webkit-linear-gradient(to left, #2c5364, #203a43, #0f2027);
+  /* Chrome 10-25, Safari 5.1-6 */
+  background: linear-gradient(to left, #2c5364, #203a43, #0f2027);
+  /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */;color:white;" class="personal_passwords password_card" data-id="<%= users[user].id %>">
                 <div>
-                  <h4>
+                  <h6>
                     <%= users[user].url %>
-                  </h4>
+                  </h6>
                 </div>
                 <div>
                   <h5>
@@ -68,11 +74,14 @@
               <% } %>
           <% } %>
         </div>
-        <h3>All Company Passwords - Created by other users</h3>
+        <h3 class="text-h4" style="color: white;">All Company Passwords - Created by other users</h3>
         <div class="flex-container">
           <% for(let user in users) { %>
             <% if (value !== users[user].user_id) { %>
-              <div class="company_passwords password_card" data-id="<%= users[user].id %>">
+              <div style="background: -webkit-linear-gradient(to left, #2c5364, #203a43, #0f2027);
+              /* Chrome 10-25, Safari 5.1-6 */
+              background: linear-gradient(to left, #2c5364, #203a43, #0f2027);
+              /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */;color:white;" class="company_passwords password_card" data-id="<%= users[user].id %>">
                 <div>
                   <h4>
                     <%= users[user].url %>
@@ -94,12 +103,12 @@
                 </div>
                 <div class="button-container">
                   <button class="btn btn-outline-info copy_password_company">Copy</button>
-
+<!-- 
                   <button class="btn btn-outline-danger remove_from_password_buttons_company"
                     id="<%= users[user].id %>" type="submit">Delete</button>
 
                   <button class="btn btn-outline-primary edit_password_company" id="<%= users[user].id %>"
-                    type="submit" style="display:block">Edit</button>
+                    type="submit" style="display:block">Edit</button> -->
 
                   <button class="btn btn-outline-secondary cancel_edits_company" id="<%= users[user].id %>"
                     type="submit" style="display:none">Cancel </button>
