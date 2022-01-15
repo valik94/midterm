@@ -55,7 +55,7 @@ const logoutRoute = require("./routes/logout");
 const indexRoute = require("./routes/index");
 const deletePasswordRoute = require("./routes/deletePassword");
 const editPasswordRoute = require("./routes/editPassword");
-const registrationRoute = require("./routes/registration");
+// const registrationRoute = require("./routes/registration");
 // <--- some thing new happened here !!
 
 /* GET & POST requests here
@@ -64,7 +64,7 @@ const registrationRoute = require("./routes/registration");
  * Home page */
 app.use("/", indexRoute);
 app.use("/login", loginRoute);
-app.use("/registration", registrationRoute);
+// app.use("/registration", registrationRoute);
 
 app.use("/password_gen", createPasswordRoutes);
 app.use("/logout", logoutRoute);
