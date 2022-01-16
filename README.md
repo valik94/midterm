@@ -98,3 +98,9 @@ Workflow
 ["Screenshot of new password generated and options (copy/delete/edit)"](https://github.com/valik94/PasswordKeeper/blob/main/node-skeleton-master/docs/Edit%20passwords%20route.png?raw=true) 
 
 ["Screenshot of edited password stored in database"](https://github.com/valik94/PasswordKeeper/blob/main/node-skeleton-master/docs/Edit%20passwords%20in%20db.png?raw=true)
+
+### Planning phase - UI/UX Wireframe
+["Link to our project wireframe"](https://www.figma.com/file/7VpM7zc6LiMMvgyR9CNdV8/PasswordKeepR?node-id=0%3A1)
+
+## Entity Relationship Diagram (ERD) 
+["Link to our ERD with database design schema"](https://app.diagrams.net/#G15LNCM8UWbmGPsV2GEBObS6Om51OGQDHP)
