@@ -15,18 +15,18 @@ app.use(cookieSession({
 }));
 
 
-/* GET route*/
+/* GET route FOR LOGIN page authentication*/
 loginRoute.get("/", (req, res) => {
   const id = req.session.user_id;
-  const idIsExisting = isAuthenticated(id, db);
+  const idIsExisting = isAuthenticated(id, db); //perform authentication based on user id
   idIsExisting.then((value) => {
 
     if (value) {
-      res.redirect('/index');
+      res.redirect('/index'); //if user in db redirect to index (homepage)
     }
     const templateVars = {value: false};
 
-  res.render('login', templateVars)
+  res.render('login', templateVars) //else redirect to login page to login/register
 })
 });
 
@@ -50,9 +50,9 @@ loginRoute.post("/", (req, res) => {
   }
 
   /* promise chain that will first check if the users email exists against our db and then validate their password
-   * async error handling for when a username or password is invalid will happen in here - TODO */
+   * async error handling for when a username or password is invalid will happen in here */
   let validUserEmail = emailExists(email, db);
-  validUserEmail.then((value) => {
+  validUserEmail.then((value) => { //helper password and email validation function follow
 
     if (!value) {
       res.send(errors.emailOrPwinvalid);

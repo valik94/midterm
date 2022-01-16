@@ -20,17 +20,17 @@ indexRoute.get("/", (req, res) => {
   const idIsExisting = isAuthenticated(id, db);
   idIsExisting.then((value) => {
 
-    if (!value) {
+    if (!value) { //if value is the user_id not found then redirect to login
       res.redirect('/login');
-    } else {
-      getPasswordsbyUsers(value, db)
+    } else { //if value found (otherwise)
+      getPasswordsbyUsers(value, db) //getPasswords of user
       .then((passwordsByUser) => {
-        const sortedpasswordsByUser = sortUserPasswords(passwordsByUser);
+        const sortedpasswordsByUser = sortUserPasswords(passwordsByUser); // sorted passwords using helper function
         console.log('ALL THE PSWORDS HERE: ', sortedpasswordsByUser);
-        const templateVars = { value: id, users: sortedpasswordsByUser };
-        res.render("index", templateVars);
+        const templateVars = { value: id, users: sortedpasswordsByUser }; //send to frontend sortedPasswords and id object
+        res.render("index", templateVars); //render in index.ejs the object (templateVars) sent
       }).catch(error => {
-        console.log(error)
+        console.log(error) // in case of an error don't break but catch error
       });
     }
   })

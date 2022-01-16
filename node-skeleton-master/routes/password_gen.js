@@ -29,25 +29,25 @@ module.exports = (db) => {
 passwordRouter.get("/", (req, res) => {
   const id = req.session.user_id;
   console.log('ID = ', id);
-  isAuthenticated(id, db)
+  isAuthenticated(id, db) //call user based authentication function by userid
   .then((userId) => {
-    if (!userId) {
+    if (!userId) { //if user not found redirect to login page
       res.redirect('/login');
     }
     console.log('USERID = ', userId);
-    return getUserOrganisations(userId, db);
+    return getUserOrganisations(userId, db); //otherwise the the organisations the user belongs to
   })
   .then((usersOrgs) => {
     console.log("USERSORGS", usersOrgs);
     const organisations = [...usersOrgs];
     const templateVars = { value: id, organisations };
-    res.render("password_gen", templateVars);
+    res.render("password_gen", templateVars); //display organisations the user belongs to in the passowrds_gen page
   }).catch(error => {
     console.log(error);
   });
 });
 
-// POSTS routes - TODO - take in db here - TEST
+// POSTS routes -  take in db here to generate random password based on user selections
 passwordRouter.post("/", (req, res) => {
   const id = req.session.user_id;
 
@@ -87,25 +87,24 @@ passwordRouter.post("/", (req, res) => {
     });
   };
 
-  const thePassword = passwordGenerator();
+  const thePassword = passwordGenerator(); //password generation helper function call
   console.log("thepassword? ", thePassword);
   console.log("REQ.BODY", req.body);
-  getOrgIdFromName(req.body.organisationName, db)
+  getOrgIdFromName(req.body.organisationName, db) //get organisation id by name of organisation helper function
     .then((val) => {
       const orgId = val;
-      newPasswordToDatabase(req.body.organisationName, id, orgId, req.body.category, req.body.url, thePassword, db);
+      newPasswordToDatabase(req.body.organisationName, id, orgId, req.body.category, req.body.url, thePassword, db); //add new password generated to database based on parameters given including organisation name
       res.send('This worked!');
     });
   } else {
-    getOrgIdFromName(req.body.organisationName, db)
+    getOrgIdFromName(req.body.organisationName, db) //get organisation id by name of organisation helper function
     .then((val) => {
       const orgId = val;
-      newPasswordToDatabase(req.body.organisationName, id, orgId, req.body.category, req.body.url, req.body.password, db);
+      newPasswordToDatabase(req.body.organisationName, id, orgId, req.body.category, req.body.url, req.body.password, db);//add new password generated to database based on parameters given including organisation name
       res.send('This also worked! You can submit your own password');
     });
   }
 });
 return passwordRouter;
 }
-// export whole router
-// module.exports = passwordRouter;
+

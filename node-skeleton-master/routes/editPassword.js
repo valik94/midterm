@@ -16,7 +16,7 @@ const db = require('../db/dbConn.js');
  }));
  module.exports = (db) => {
 
-// POST route
+// POST route to edit passwords upon click action, sends password text to helper.js function and returns the edited string and sends to db for storage
 editPasswordRoute.post("/", (req, res) => {
   const buttonId = req.body.clicked_button;
   const passwordText = req.body.password_text;
@@ -26,7 +26,7 @@ editPasswordRoute.post("/", (req, res) => {
     return getEditedPassword(buttonId, db);
   }).then((value) => {
     const updatedPassword = value;
-    res.send(updatedPassword.rows[0].password_text)
+    res.send(updatedPassword.rows[0].password_text) //send updatedPassword to front-end as password_text
   });
 });
 return editPasswordRoute;

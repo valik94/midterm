@@ -56,8 +56,7 @@ const logoutRoute = require("./routes/logout");
 const indexRoute = require("./routes/index");
 const deletePasswordRoute = require("./routes/deletePassword");
 const editPasswordRoute = require("./routes/editPassword");
-// const registrationRoute = require("./routes/registration");
-// <--- some thing new happened here !!
+
 
 /* GET & POST requests here
  * Mount all resource routes
@@ -66,8 +65,6 @@ const editPasswordRoute = require("./routes/editPassword");
 app.use("/users", usersRoutes(db));
 app.use("/", indexRoute);
 app.use("/login", loginRoute);
-// app.use("/registration", registrationRoute);
-
 app.use("/password_gen", createPasswordRoutes(db));
 app.use("/logout", logoutRoute);
 app.use("/deletePassword", deletePasswordRoute(db));
@@ -78,20 +75,3 @@ app.listen(PORT, () => {
   console.log(`Example app listening on port ${PORT}`);
 });
 
-// app.post("/registration", (req, res) => {
-//   const { username, password } = req.body;
-//   db.query(
-//     `INSERT INTO users (email,master_password)
-//   VALUES ('${username}', '${password}');
-//   `
-//   )
-//     .then((result) => {
-//       console.log(`result is:`, result);
-//     })
-//     .catch((err) => {
-//       console.log(err);
-//     });
-//   console.log(req.body.username);
-//   console.log(req.body.password);
-//   res.redirect("/login");
-// });

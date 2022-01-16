@@ -9,6 +9,5 @@ CREATE TABLE passwords (
   url VARCHAR(255) NOT NULL,
   category VARCHAR(255) NOT NULL,
   organisation_id INTEGER REFERENCES organisations(id) ON DELETE CASCADE
-  -- created_at TIMESTAMP,
-  -- updated_at TIMESTAMP
+
 );

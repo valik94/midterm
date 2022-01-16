@@ -22,27 +22,8 @@
     <script type="text/javascript" src="/vendor/jquery-3.0.0.js"></script>
     <script type="text/javascript" src="/scripts/app.js"></script>
   </head>
-
   <body>
     <%- include('partials/_header') %>
-    <!-- <header class="header">
-      <h2 class="main-logo">PASSWORD KEEPER</h2>
-      <form class="form-data" id="login-form">
-        <input
-          type="text"
-          placeholder="USERNAME"
-          name="username"
-          id="username"
-        />
-        <input
-          type="password"
-          placeholder="PASSWORD"
-          name="password"
-          id="password"
-        />
-        <button id="lgn-btn" class="btn btn-outline-warning" type="submit">LOGIN</button>
-      </form>
-    </header> -->
     <section class="body">
       <div class="left-body-typo">
         <p class="dont">
@@ -63,17 +44,13 @@
         <p class="iqande">Its quick and easy</p>
         <form action="/passwords" method="POST" id="signup-form">
           <div class="reg-form">
-            <!-- <label for="name">Enter Your Name: </label><br />
-            <input type="text" placeholder="name" name="name" id="name" /> -->
-            <!-- <label for="usr-rgstn">Enter Your Username: </label><br />
-            <input
-              type="text"
-              placeholder="username"
-              name="username"
-              id="usr-rgstn"
-            /> -->
             <label for="email">Enter Your Email: </label><br />
-            <input type="email" placeholder="email" name="email" id="register-email" />
+            <input
+              type="email"
+              placeholder="email"
+              name="email"
+              id="register-email"
+            />
             <label for="new-password">Enter Your Password: </label><br />
             <input
               type="password"
@@ -89,12 +66,7 @@
               id="organisation-id"
             />
             <label for="date">Enter today's date:</label><br />
-            <input
-              type="text"
-              placeholder="YYYY-MM-DD"
-              name="date"
-              id="date"
-            />
+            <input type="text" placeholder="YYYY-MM-DD" name="date" id="date" />
             <br />
           </div>
           <button id="signup" class="btn btn-outline-warning">SIGN UP!</button>

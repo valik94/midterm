@@ -1,6 +1,7 @@
 const express = require("express");
 const router = express.Router();
 
+//POST ROUTE -this is the new users registration post route that stores new users registered in the form to the database
 module.exports = (db) => {
   router.post("/", (req, res) => {
     console.log('REQ.BODY = ',req.body);
@@ -21,10 +22,7 @@ module.exports = (db) => {
       [req.body.email]
       )
     })
-    // db.query(`SELECT id, organisation_id FROM users
-    // WHERE email = ${req.body.email}
-    // INSERT INTO users_organisations (user_id, organisations_id)
-    // VALUES(users.id, ${req.body.organisation_id}`)
+
       .then((result) => {
         console.log(`result is:`, result);
       })
@@ -41,5 +39,5 @@ module.exports = (db) => {
     res.send("Hello Passwords Page");
   });
 
-  return router; // <--- some thing new happened here !!
+  return router;
 };
