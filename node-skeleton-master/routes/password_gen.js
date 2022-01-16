@@ -10,10 +10,10 @@ const express = require("express");
 const passwordRouter = express.Router();
 const generator = require("generate-password");
 const app = express();
-// const { db, Pool } = require('../db/dbConn'); /new change /
+// const { db, Pool } = require('../db/dbConn');
 const {
   isAuthenticated,
-  getUserOrganizations,
+  getUserOrganisations,
   newPasswordToDatabase,
   getOrgIdFromName,
 } = require("../helpers.js");
@@ -28,96 +28,105 @@ app.use(
     maxAge: 24 * 60 * 60 * 1000,
   })
 );
+module.exports = (db) => {
+  /* get routes for password generator page
+   * query to db for the current logged in user, and check what orginizations they are part of
+   * send that information back to the client for the orginzation drop down menu to pick from */
+  passwordRouter.get("/", (req, res) => {
+    const id = req.session.user_id;
+    console.log("ID = ", id);
+    isAuthenticated(id, db) //call user based authentication function by userid
+      .then((userId) => {
+        if (!userId) {
+          //if user not found redirect to login page
+          res.redirect("/login");
+        }
+        console.log("USERID = ", userId);
+        return getUserOrganisations(userId, db); //otherwise the the organisations the user belongs to
+      })
+      .then((usersOrgs) => {
+        console.log("USERSORGS", usersOrgs);
+        const organisations = [...usersOrgs];
+        const templateVars = { value: id, organisations };
+        res.render("password_gen", templateVars); //display organisations the user belongs to in the passowrds_gen page
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  });
 
-/* get routes for password generator page
- * query to db for the current logged in user, and check what orginizations they are part of
- * send that information back to the client for the orginzation drop down menu to pick from */
-passwordRouter.get("/", (req, res) => {
-  const id = req.session.user_id;
+  // POSTS routes -  take in db here to generate random password based on user selections
+  passwordRouter.post("/", (req, res) => {
+    const id = req.session.user_id;
 
-  isAuthenticated(id)
-    .then((userId) => {
-      if (!userId) {
-        res.redirect("/login");
-      }
-      return getUserOrganizations(userId);
-    })
-    .then((usersOrgs) => {
-      const organisations = [...usersOrgs];
-      const templateVars = { value: id, organisations };
-      res.render("password_gen", templateVars);
-    })
-    .catch((error) => {
-      console.log(error);
-    });
-});
+    if (req.body.length) {
+      const passwordGenerator = function () {
+        if (req.body.uppercase === "true") {
+          uppercaseBoolean = true;
+        } else if (req.body.uppercase === "false") {
+          uppercaseBoolean = false;
+        }
 
-// POSTS routes - TODO - take in db here - TEST
-passwordRouter.post("/", (req, res) => {
-  const id = req.session.user_id;
+        if (req.body.lowercase === "true") {
+          lowercaseBoolean = true;
+        } else if (req.body.lowercase === "false") {
+          lowercaseBoolean = false;
+        }
 
-  if (req.body.length) {
-    const passwordGenerator = function () {
-      if (req.body.uppercase === "true") {
-        uppercaseBoolean = true;
-      } else if (req.body.uppercase === "false") {
-        uppercaseBoolean = false;
-      }
+        if (req.body.symbols === "true") {
+          symbolsBoolean = true;
+        } else if (req.body.symbols === "false") {
+          symbolsBoolean = false;
+        }
 
-      if (req.body.lowercase === "true") {
-        lowercaseBoolean = true;
-      } else if (req.body.lowercase === "false") {
-        lowercaseBoolean = false;
-      }
+        if (req.body.numbers === "true") {
+          numbersBoolean = true;
+        } else if (req.body.numbers === "false") {
+          numbersBoolean = false;
+        }
 
-      if (req.body.symbols === "true") {
-        symbolsBoolean = true;
-      } else if (req.body.symbols === "false") {
-        symbolsBoolean = false;
-      }
+        return (password = generator.generate({
+          length: req.body.length,
+          numbers: numbersBoolean,
+          uppercase: uppercaseBoolean,
+          lowercase: lowercaseBoolean,
+          symbols: symbolsBoolean,
+        }));
+      };
 
-      if (req.body.numbers === "true") {
-        numbersBoolean = true;
-      } else if (req.body.numbers === "false") {
-        numbersBoolean = false;
-      }
-
-      return (password = generator.generate({
-        length: req.body.length,
-        numbers: numbersBoolean,
-        uppercase: uppercaseBoolean,
-        lowercase: lowercaseBoolean,
-        symbols: symbolsBoolean,
-      }));
-    };
-
-    const thePassword = passwordGenerator();
-    console.log("thepassword? ", thePassword);
-    getOrgIdFromName(req.body.organisationName).then((val) => {
-      const orgId = val;
-      newPasswordToDatabase(
-        id,
-        orgId,
-        req.body.category,
-        req.body.url,
-        thePassword
-      );
-      res.send("This worked!");
-    });
-  } else {
-    getOrgIdFromName(req.body.organisationName).then((val) => {
-      const orgId = val;
-      newPasswordToDatabase(
-        id,
-        orgId,
-        req.body.category,
-        req.body.url,
-        req.body.password
-      );
-      res.send("This also worked! You can submit your own password");
-    });
-  }
-});
-
-// export whole router
-module.exports = passwordRouter;
+      const thePassword = passwordGenerator(); //password generation helper function call
+      console.log("thepassword? ", thePassword);
+      console.log("REQ.BODY", req.body);
+      getOrgIdFromName(req.body.organisationName, db) //get organisation id by name of organisation helper function
+        .then((val) => {
+          const orgId = val;
+          newPasswordToDatabase(
+            req.body.organisationName,
+            id,
+            orgId,
+            req.body.category,
+            req.body.url,
+            thePassword,
+            db
+          ); //add new password generated to database based on parameters given including organisation name
+          res.send("This worked!");
+        });
+    } else {
+      getOrgIdFromName(req.body.organisationName, db) //get organisation id by name of organisation helper function
+        .then((val) => {
+          const orgId = val;
+          newPasswordToDatabase(
+            req.body.organisationName,
+            id,
+            orgId,
+            req.body.category,
+            req.body.url,
+            req.body.password,
+            db
+          ); //add new password generated to database based on parameters given including organisation name
+          res.send("This also worked! You can submit your own password");
+        });
+    }
+  });
+  return passwordRouter;
+};

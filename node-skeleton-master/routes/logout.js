@@ -12,11 +12,11 @@ app.use(cookieSession({
   maxAge: 24 * 60 * 60 * 1000
 }));
 
-/* POST route
+/* POST route to LOGOUT
  * https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise/then */
 logoutRoute.post("/", (req, res) => {
   req.session = null;
-  res.redirect('/login');
+  res.redirect('/');
 });
 
 module.exports = logoutRoute;

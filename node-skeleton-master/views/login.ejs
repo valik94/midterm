@@ -17,6 +17,9 @@
     href="https://fonts.googleapis.com/css2?family=Raleway&family=Spectral+SC:wght@500&family=Syncopate:wght@700&display=swap"
     rel="stylesheet"
   />
+  <script type="text/javascript" src="/vendor/jquery-3.0.0.js"></script>
+  <script type="text/javascript" src="/scripts/app.js"></script>
+
 </head>
 
 <body>
@@ -51,18 +54,18 @@
         and cyberthreats.
       </h3>
     </div>
-    <!--registration pages-->
+    <!--registration page-->
     <div class="right-body-registration">
       <p class="r">REGISTRATION</p>
       <p class="iqande">Its quick and easy</p>
-      <form action="/registration" method="POST">
-        <!--// <--- some thing new happened here !!-->
+      <form action="/registration" method="POST" id="signup_form">
+        <!--registration form with labels and name used as input fields-->
         <div class="reg-form">
           <label for="email">Enter Your Email: </label><br />
           <input
             type="email"
             placeholder="email"
-            name="username"
+            name="email"
             id="username"
           />
           <label for="new-password">Enter Your Password: </label><br />
@@ -72,12 +75,12 @@
             name="password"
             id="new-password"
           />
-          <label for="organization-id">Enter Organization_id: </label><br />
+          <label for="organisation-id">Enter Organisation_id: </label><br />
           <input
             type="text"
-            placeholder="organization_id"
-            name="organization_id"
-            id="organization-id"
+            placeholder="organisation id"
+            name="organisation_id"
+            id="organisation-id"
           />
           <br />
           <label for="date">YYYY-MM-DD: </label><br />
