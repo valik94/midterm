@@ -16,7 +16,7 @@ app.use(
   })
 );
 module.exports = (db) => {
-// POST route
+// POST route to delete password on same page
 deletePasswordRoute.post("/", (req, res) => {
   const buttonId = req.body.clicked_button;
   deletePasswordFromDb(buttonId, db);
